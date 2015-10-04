@@ -1,0 +1,119 @@
+<html>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<style type="text/css">
+.inputform {
+	float: left;
+	margin-left: 35%;
+	margin-top: 10%;
+	width: 500px;
+	border: 1px solid #0066CC;
+	border-radius: 10px;
+	padding: 10px;
+}
+
+.inputform {
+	width: 500px;
+}
+
+table tr td input,textarea,select {
+	width: 200px;
+}
+
+#register {
+	margin-left: 100px;
+	width: 100px;
+	margin-top: 10%;
+}
+
+#login {
+	margin-left: 100px;
+	width: 100px;
+	margin-top: 10%;
+}
+
+.design {
+	background-color: #0066CC;
+	color: white;
+	padding-left: 38%;
+}
+
+#password {
+	background-color: yellow;
+	width: 120%;
+	margin-top: 10%
+}
+
+#email {
+	background-color: yellow;
+	width: 120%;
+	margin-top: 10%
+}
+</style>
+<body>
+	<div class="inputform" style="float: left;">
+		<h2 class="design">Login Form</h2>
+		<script type="text/javascript">
+	function validate(){
+	var email = document.getElementById("email").value;
+	var password = document.getElementById("password").value;
+	var status = false;
+		if(email.length<1){  
+			document.getElementById("emailError").innerHTML="Please enter your email id";  
+			alert("FALSE EMAIL");
+			status=false;  
+		}else{  
+			document.getElementById("emailErrorPass").innerHTML=" ";  
+		} 
+		if(password.length<1){  
+			document.getElementById("passwordloc").innerHTML="Password must be at least 6 char long"; 
+			alert("FALSE PASSWORD");
+			status=false;  
+		}else{
+			document.getElementById("passwordloc").innerHTML=" ";  
+		} 
+		if(email.length > 1 && password.length > 6)
+		{
+			alert("TRUE USER AND  PASSWORD");
+			status=true;
+		}
+		return status;
+	}
+</script>
+		<form action="LoginServlet" method="post" onsubmit="return validate()">
+			<table>
+				<tr>
+					<td>Email ID:</td>
+					<td><input type="text" id="email" name="email"
+						placeholder="   ENTER USER NAME " />
+					</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td><span id="emailError" style="color: red"></span>
+					</td>
+				</tr>
+				<tr>
+					<td>Password:</td>
+					<td><input id="password" type="password" name="password"
+						placeholder="    ENTER PASSWORD" />
+					</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td><span id="passwordloc" style="color: red"></span>
+					</td>
+				</tr>
+				<tr>
+					<td><input id="login" type="submit" value="Login"
+						onsubmit="return validate();" />
+					</td>
+					<td><input id="register" type="submit" value="New User"
+						onclick="location.href='registration.html'" />
+					</td>
+				</tr>
+			</table>
+		</form>
+	</div>
+</body>
+</html>

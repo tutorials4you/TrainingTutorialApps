@@ -1,0 +1,41 @@
+<html>
+<head>
+<title>Javascript Checkbox Visibility</title>
+
+<script type="text/javascript">
+    
+        function showHide()
+        {
+            if(document.getElementById('Checkbox1').checked)
+            {
+                document.getElementById('Text1').style.visibility = 'visible';
+		document.getElementById('entryLevelCb').style.visibility = 'visible';
+		document.getElementById('entry').style.visibility = 'visible';
+            }
+            else
+            {
+                document.getElementById('Text1').style.visibility = 'hidden';
+		document.getElementById('entryLevelCb').style.visibility = 'hidden';
+		document.getElementById('entry').style.visibility = 'hidden';
+            }
+        }
+
+    </script>
+
+</head>
+<body>
+
+	<p>Check mark the checkbox to set the visiblity property of
+		textbox. It will allow you to show/hide the textbox control
+		dynamically.</p>
+
+	<p>
+		<input id="Checkbox1" type="checkbox" onclick="showHide();"
+			checked="checked" /><label for="Checkbox1">Show/Hide</label><br />
+		<br /> <input id="Text1" type="text" /> <input type="checkbox"
+			id="entryLevelCb" name="Entry level" value="Entry Level"><label
+			id="entry" for="entryLevelCb">Entry Level </label>
+	</p>
+
+</body>
+</html>
