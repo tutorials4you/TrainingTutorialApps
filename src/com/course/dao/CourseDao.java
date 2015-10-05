@@ -23,7 +23,7 @@ public class CourseDao {
             try {
                 this.connection = ConProvider.getConnection();
                 PreparedStatement ps = this.connection.prepareStatement("select cname from COURSE_DETAILS_RECORD  where cid = ?");
-                ps.setInt(1, course.getCid());
+                ps.setString(1, course.getCid());
                 this.rs = ps.executeQuery();
                 if (this.rs.next()) {
                     this.updateCourse(course);
@@ -61,14 +61,31 @@ public class CourseDao {
         try {
             try {
                 this.connection = ConProvider.getConnection();
-                this.ps = this.connection.prepareStatement("update COURSE_DETAILS_RECORD set cname=?, cminduration=?, cmaxduration=?, CAUTHOR=?, COURSEROLEID =?where cid=?");
+                String sqlQuery = "update COURSE_DETAILS_RECORD set CNAME=?, CAUTHOR=?, MIN_DURATION=?, A_TL_EL=?, A_TL_PO =?,A_TL_AD=?,A_TL_AS=?,A_TM_EL=?,A_TM_PO=?,A_TM_AD=?,A_TM_AS=?,M_TL_EL=?,M_TL_PO=?,M_TL_AD=?,M_TL_AS=?,M_TM_EL=?,M_TM_PO=?,M_TM_AD=?,M_TM_AS=?,DM=? where cid=?";
+                this.ps = this.connection.prepareStatement(sqlQuery);
                 System.out.println("UPDATE COURSE" + course.getCname());
-                this.ps.setString(1, course.getCname());
-                this.ps.setString(2, course.getCmin());
-                this.ps.setInt(3, course.getCmax());
-                this.ps.setString(4, course.getCauthor());
-                this.ps.setInt(6, course.getCid());
-                this.ps.setString(5, course.getCourseRoleId());
+                System.out.println("Sql Query " + sqlQuery);
+                this.ps.setString(1,course.getCname());
+                this.ps.setString(2,course.getCauthor());
+                this.ps.setString(3,course.getCmin());
+                this.ps.setString(4,course.getTlEntrylevel());
+                this.ps.setString(5,course.getTlpo());
+                this.ps.setString(6,course.getTlad());
+                this.ps.setString(7,course.getTlas());
+                this.ps.setString(8,course.getTmel());
+                this.ps.setString(9,course.getTmpo());
+                this.ps.setString(10,course.getTmad());
+                this.ps.setString(11,course.getTmas());
+                this.ps.setString(12,course.getMtlEntrylevel());
+                this.ps.setString(13,course.getMtlpo());
+                this.ps.setString(14,course.getMtlad());
+                this.ps.setString(15,course.getMtlas());
+                this.ps.setString(16,course.getMtmel());
+                this.ps.setString(17,course.getMtmpo());
+                this.ps.setString(18,course.getMtmad());
+                this.ps.setString(19,course.getMtmas());
+                this.ps.setString(20,course.getDm());
+                this.ps.setString(21,course.getCid());
                 this.ps.executeUpdate();
             }
             catch (SQLException e) {
@@ -91,7 +108,7 @@ public class CourseDao {
                 this.rs = this.statement.executeQuery("select * from COURSE_DETAILS_RECORD");
                 while (this.rs.next()) {
                     CourseSecond course = new CourseSecond();
-                    course.setCid(this.rs.getInt("CID"));
+                    course.setCid(this.rs.getString("CID"));
                     course.setCname(this.rs.getString("CNAME"));
                     course.setCauthor(this.rs.getString("CAUTHOR"));
                     course.setCfileName(this.rs.getString("COURSEFILENAME"));
@@ -129,7 +146,7 @@ public class CourseDao {
                 }
                 while (rs.next()) {
                     CourseSecond course = new CourseSecond();
-                    course.setCid(rs.getInt("CID"));
+                    course.setCid(rs.getString("CID"));
                     course.setCname(rs.getString("CNAME"));
                     course.setCmin(rs.getString("CMINDURATION"));
                     course.setCmax(rs.getInt("CMAXDURATION"));
@@ -160,7 +177,7 @@ public class CourseDao {
                 preparedStatement.setInt(1, cid);
                 ResultSet rs = preparedStatement.executeQuery();
                 if (rs.next()) {
-                    course.setCid(rs.getInt("CID"));
+                    course.setCid(rs.getString("CID"));
                     course.setCname(rs.getString("CNAME"));
                     course.setCauthor(rs.getString("CAUTHOR"));
                     course.setCmin(rs.getString("MIN_DURATION"));

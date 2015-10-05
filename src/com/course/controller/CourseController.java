@@ -81,15 +81,29 @@ public class CourseController extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         CourseSecond course = new CourseSecond();
+        course.setCid(request.getParameter("cid"));
         course.setCname(request.getParameter("cname"));
-        course.setCmin(request.getParameter("cminDuration"));
-        course.setCmax(Integer.parseInt(request.getParameter("cmaxDuration")));
         course.setCauthor(request.getParameter("cauthor"));
-        int courseId = Integer.parseInt(request.getParameter("cid"));
-        String courseUserRole = request.getParameter("userRole");
-        course.setCourseRoleId(courseUserRole);
-        System.out.println("\t"+request.getParameter("uname") +"\t" +Integer.parseInt(request.getParameter("cminDuration"))+"\t"+Integer.parseInt(request.getParameter("cid")));
-        if(courseId != 0)
+        course.setCmin(request.getParameter("minDuration"));
+        course.setTlEntrylevel(request.getParameter("atlel"));
+        course.setTlpo(request.getParameter("atlpo"));
+        course.setTlad(request.getParameter("atl_ad"));
+        course.setTlas(request.getParameter("atlas"));
+        course.setTmel(request.getParameter("atmel"));
+        course.setTmpo(request.getParameter("atmpo"));
+        course.setTmad(request.getParameter("atm_ad"));
+        course.setTmas(request.getParameter("atmas"));
+        course.setMtlEntrylevel(request.getParameter("mEntrylevel"));
+        course.setMtlpo(request.getParameter("mtlpo"));
+        course.setMtlad(request.getParameter("mtl_ad"));
+        course.setMtlas(request.getParameter("mtlas"));
+        course.setMtmel(request.getParameter("mtmel"));
+        course.setMtmpo(request.getParameter("mtmpo"));
+        course.setMtmad(request.getParameter("mtm_ad"));
+        course.setMtmas(request.getParameter("mtmas"));
+        course.setDm(request.getParameter("dm"));
+        String courseId =request.getParameter("cid").toString();
+        if(courseId.length()!=0)
         {
         	System.out.println("IF BLOCK OF POST");
             course.setCid(courseId);

@@ -58,7 +58,6 @@
 	<div class="inputform" style="float: left;">
 		<h2 class="design">EDIT COURSE DETAILS</h2>
 		<form method="POST" action='CourseController'>
-			<!-- <form method="POST" action='CourseController' name="frmAddUser"> -->
 			<%
 				String action = request.getParameter("action");
 				System.out.println(action);

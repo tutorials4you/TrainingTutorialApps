@@ -15,9 +15,10 @@
 	<jsp:include page="rightMenu.jsp" />
 	<div class="inputform">
 		<h2 class="design">Edit Course</h2>
-		<form action="InsertCourseDetails" method="post" enctype="multipart/form-data">
+		<form method="POST" action='CourseController'>
+		
 			<table>
-				<tr id =coursename>
+					<tr id =coursename>
 					<td >Course Name:</td>
 					<td id="coursenametestBox"><input type="text" id="email" name="cname"
 						value="<c:out value="${course.cname}" />" /></td>
@@ -147,6 +148,11 @@
 					<td><input id="login" type="submit" value="Submit" />
 					</td>
 					</tr>
+					<tr>
+					<td>Course ID:</td>
+					<td><input type="hidden" id="email" name="cid"
+						value="<c:out value="${course.cid}" />" readonly="readonly" /></td>
+				</tr>
 			</table>
 		</form>
 	</div>

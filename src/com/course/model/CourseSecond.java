@@ -1,7 +1,7 @@
 package com.course.model;
 
 public class CourseSecond {
-    int cid;
+    String cid;
     String cmin;
     int cmax;
     String cauthor;
@@ -170,11 +170,11 @@ public class CourseSecond {
         this.cname = cname;
     }
 
-    public int getCid() {
+    public String getCid() {
         return this.cid;
     }
 
-    public void setCid(int cid) {
+    public void setCid(String cid) {
         this.cid = cid;
     }
 

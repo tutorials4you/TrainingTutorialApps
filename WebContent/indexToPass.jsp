@@ -69,7 +69,7 @@
 	System.out.println(pictureCount);
 	session.setAttribute("maxPictureCount", pictureCount);
 %>
-<body bgcolor="#94D4E9">
+<body>
 	<script src="http://code.jquery.com/jquery-1.4.3.min.js"></script>
 	<script type="text/javascript">
 	</script>
