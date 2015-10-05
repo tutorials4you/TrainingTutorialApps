@@ -20,7 +20,7 @@ public class LogoutServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");
 		PrintWriter out=response.getWriter();
-		request.getRequestDispatcher("header.html").include(request, response);
+		request.getRequestDispatcher("header.jsp").include(request, response);
 		request.getSession().invalidate();
 		response.setHeader("Cache-Control","no-cache"); //Forces caches to obtain a new copy of the page from the origin server
 		response.setHeader("Cache-Control","no-store"); //Directs caches not to store the page under any circumstance

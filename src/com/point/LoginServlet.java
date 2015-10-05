@@ -14,7 +14,7 @@ public class LoginServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");
 		PrintWriter out=response.getWriter();
-		request.getRequestDispatcher("header.html").include(request, response);
+		request.getRequestDispatcher("header.jsp").include(request, response);
 		String email=request.getParameter("email");
 		String password=request.getParameter("password");
 		//String role = LoginDao.validate(email, password);

@@ -15,7 +15,7 @@ public class UploadCourse extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");
 		PrintWriter out=response.getWriter();
-		request.getRequestDispatcher("header.html").include(request, response);
+		request.getRequestDispatcher("header.jsp").include(request, response);
 		request.getRequestDispatcher("link.html").include(request, response);
 		request.getRequestDispatcher("rightMenu.jsp").include(request, response);
 
@@ -23,8 +23,8 @@ public class UploadCourse extends HttpServlet {
 		if(session==null){
 			response.sendRedirect("index.html");
 		}else{
-			String email=(String)session.getAttribute("email");
-			out.print("<span style='float:right'>Hi, "+email+"</span>");
+			//String email=(String)session.getAttribute("email");
+			//out.print("<span style='float:right'>Hi, "+email+"</span>");
 			request.getRequestDispatcher("uploadCourse.jsp").include(request, response);
 			String msg=(String)request.getAttribute("msg");
 			if(msg!=null){

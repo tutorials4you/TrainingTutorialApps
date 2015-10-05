@@ -10,7 +10,7 @@
 <head>
 </head>
 <body>
-	<jsp:include page="header.html" />
+	<jsp:include page="header.jsp" />
 	<jsp:include page="link.html" />
 	<jsp:include page="rightMenu.jsp" />
 	<div class="inputform">
@@ -139,7 +139,7 @@
 					</td>
 					<td id="secondtd1"
 						style="position: relative; bottom: 22px  !important"><input
-						type="checkbox" id="entryLevelCb" name="dm" value="DM" ${course.dm == '1' ? 'checked' : ''}><label
+						type="checkbox" id="entryLevelCb" name="dm" value="1" ${course.dm == '1' ? 'checked' : ''}><label
 						for="teamLead">DM</label></td>
 				</tr>
 				<tr id=button>
@@ -149,7 +149,6 @@
 					</td>
 					</tr>
 					<tr>
-					<td>Course ID:</td>
 					<td><input type="hidden" id="email" name="cid"
 						value="<c:out value="${course.cid}" />" readonly="readonly" /></td>
 				</tr>

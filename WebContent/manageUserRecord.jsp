@@ -13,7 +13,7 @@ th {
 </style>
 </head>
 <body>
-<jsp:include page="header.html" />
+<jsp:include page="header.jsp" />
 <jsp:include page="link.html" />
 <jsp:include page="rightMenu.jsp" />
     <table border=1>

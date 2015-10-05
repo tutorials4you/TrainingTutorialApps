@@ -16,7 +16,7 @@ public class NormalUsers extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");
 		PrintWriter out=response.getWriter();
-		request.getRequestDispatcher("header.html").include(request, response);
+		request.getRequestDispatcher("header.jsp").include(request, response);
 		request.getRequestDispatcher("link.html").include(request, response);
 		request.getRequestDispatcher("rightMenuNormalUsers.jsp").include(request, response);
 

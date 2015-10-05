@@ -40,7 +40,7 @@
 
 	<!-- header -->
 	<h2 style="margin-top: 2px;"">
-		<center>AT & T</center>
+		<center>AT & T <span><%= session.getAttribute("email") %></span></center>
 	</h2>
 	<h3 style="margin-top: 10px; background-color: #0066CC; color: #0066CC;">c</h3>
 	<!-- body -->

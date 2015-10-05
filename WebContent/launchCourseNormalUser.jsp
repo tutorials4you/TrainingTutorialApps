@@ -13,7 +13,7 @@ th {
 <title>Show All Users</title>
 </head>
 <body>
-	<jsp:include page="header.html" />
+	<jsp:include page="header.jsp" />
 	<jsp:include page="link.html" />
 	<jsp:include page="rightMenuNormalUsers.jsp" />
 	<table border=1>

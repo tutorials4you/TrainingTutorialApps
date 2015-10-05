@@ -18,7 +18,7 @@
 </style>
 </head>
 <body>
-<jsp:include page="header.html" />
+<jsp:include page="header.jsp" />
 <jsp:include page="rightMenu.jsp" />
 <div class="inputform">
 <h2 class="design">Edit Profile</h2>
