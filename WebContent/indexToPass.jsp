@@ -3,34 +3,44 @@
 <html>
 <head>
 <style>
-#MinButton {
-	left: 70%;
-	position: relative;
-	text-align: center;
-	bottom: 90px !important;
-}
-
 #err {
 	left: 3%;
-	position: relative;
+	position: absolute;
 	text-align: center;
 	bottom: 3px !important;
 }
 
 #AddButton {
-	left: 8%;
-	position: relative;
+	left: 101px;
+	position: absolute;
+	height: 66px;
 	text-align: center;
-	bottom: 90px !important;
+	bottom: 348px!important;
+	width: 79px;
+	border:0px;
+	background:url("images/nextButton.jpg");
+}
+
+#MinButton {
+	left: 1221px;
+	position: absolute;
+	text-align: center;
+	bottom: 344px!important;
+    width: 78px;
+    height:74px;
+	background:url("images/previous.jpg");
+	border:0px;
 }
 
 #statusValue {
-	left: 40%;
-	position: relative;
+	left: 563px;
+	position: absolute;
 	text-align: center;
-	bottom: 90px !important;
+	bottom:7px!important;
 	border: solid 3px blue;
+	
 }
+
 
 #abc {
 	position: relative;
@@ -38,6 +48,10 @@
 	top: 180px;
 	margin-left: -100px;
 	margin-top: -50px;
+}
+#bodyDesign{
+	background:url("images/body.jpg");
+
 }
 </style>
 <script type="text/javascript">
@@ -69,7 +83,7 @@
 	System.out.println(pictureCount);
 	session.setAttribute("maxPictureCount", pictureCount);
 %>
-<body>
+<body id ='bodyDesign'>
 	<script src="http://code.jquery.com/jquery-1.4.3.min.js"></script>
 	<script type="text/javascript">
 	</script>
@@ -108,28 +122,24 @@
 		});
 	</script>
 	<table id="abc" border=1; align:center>
-		<tr>
-			<td>ADADADA</td>
-			<td>ADADADA</td>
-		</tr>
-		<tr>
-			<td>ADADADA</td>
-			<td>ADADADA</td>
+	     <tr>
+			<td>Course</td>
+			<td>AVPN</td>
 		</tr>
 
 		<tr>
-			<td>ADADADA</td>
-			<td>ADADADA</td>
+			<td>Course Author</td>
+			<td>Srinivas</td>
 		</tr>
 
 		<tr>
-			<td>ADADADA</td>
-			<td>ADADADA</td>
+			<td>Min Duration </td>
+			<td>20 Min</td>
 		</tr>
 
 		<tr>
-			<td>ADADADA</td>
-			<td>ADADADA</td>
+			<td>Course Level</td>
+			<td>Entry Level</td>
 		</tr>
 
 
@@ -137,8 +147,8 @@
 
 	<span id="err"> </span>
 	<span id="TextBox"></span>
-	<input type="Button" id='AddButton' value="Next" onclick="loadXMLDoc()" />
+	<input type="Button" id='MinButton'  onclick="loadXMLDoc()" />
 	<input type="text" id='statusValue' readonly="readonly" />
-	<input type="Button" id='MinButton' value="Previous" onclick="loadXMLDoc()" />
+	<input type="Button" id='AddButton' onclick="loadXMLDoc()" />
 </body>
 </html>

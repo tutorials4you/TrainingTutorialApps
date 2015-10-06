@@ -37,7 +37,7 @@
 				</tr>
 				
 				<!-- --***********************************Avilable ************************************** -->
-				<div id ="available">Available</div>
+				<div id ="available">Available For</div>
 				
 				<tr id="userRole">
 					<td id="firsttd">
@@ -92,7 +92,7 @@
 						</div>
 					</td>
 		<!-- --***********************************Mandantory ************************************** -->
-					<div id ="mandantory">Mandantory</div>
+					<div id ="mandantory">Mandantory For</div>
 					<td id="firsttd">
 						<div>
 							<input type="checkbox" id="mentryLevelCb" value="Entry Level"

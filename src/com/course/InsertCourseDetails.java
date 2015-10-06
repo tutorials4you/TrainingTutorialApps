@@ -89,38 +89,51 @@ extends HttpServlet {
         System.out.println("________" + fileExtension + "__________");
 
         System.out.println("*********************************************");
-    //    this.status = CourseDao.insertCourseDetails(cname, cauthor, (String)fileName2, (String)tlEntrylevel, (String)tlpo, (String)tlad, (String)tlas, (String)tmel, (String)tmpo, (String)tmad, (String)tmas, (String)dm);
-        if (fileExtension.equals("pptx")) {
-            fileSaveDir = new File(this.location);
-            if (!fileSaveDir.exists()) {
-                fileSaveDir.mkdirs();
-            }
-            this.status =CourseDaoSecond.insertCourseDetails(cname, cauthor, minDuration, fileName2, tlEntrylevel, tlpo, tlad, tlas, tmel, tmpo, tmad, tmas, mtlEntrylevel, mtlpo, mtlad, mtlas, mtmel, mtmpo, mtmad, mtmas, fileExtension, dm)  ;
-            PpttoPNG.insertPicture((String)fileName2);
-        } else if (fileExtension.equals("mp4")) {
-            System.out.println("FILE EXTENSION IS NOT FOUND" + fileExtension);
-            fileSaveDir = new File("C://Users//IBM_ADMIN//Desktop//Video");
-            if (!fileSaveDir.exists()) {
-                fileSaveDir.mkdirs();
-            }
-            for (Part part2 : request.getParts()) {
-                this.fileName = this.getFileName(part2);
-                if (this.fileName == null || this.fileName.isEmpty()) continue;
-                part2.write("C://Users//IBM_ADMIN//Desktop//Video" + File.separator + this.fileName);
-            }
-            this.status =CourseDaoSecond.insertCourseDetails(cname, cauthor, minDuration, fileName2, tlEntrylevel, tlpo, tlad, tlas, tmel, tmpo, tmad, tmas, mtlEntrylevel, mtlpo, mtlad, mtlas, mtmel, mtmpo, mtmad, mtmas, fileExtension, dm)  ;
-
-        }
-        if (this.status > 0) {
+        if(mtlEntrylevel!=null||mtlpo!=null||mtlad!=null||mtlas!=null||mtmel!=null||mtmpo!=null||mtmad!=null||mtmas!=null){
+        	System.out.println("Mandantory Field is Not empty");
         	
-        	CourseDao dao = new CourseDao();
-        	request.setAttribute("courses", dao.getAllCourses());
-        	out.println("<script type=\"text/javascript\">");
-            out.println("alert('FIle Uploaded Sycessfully');");
-            out.println("</script>");
-            request.getRequestDispatcher("launchCourse.jsp").forward(request, response);
+            if (fileExtension.equals("pptx")) {
+                fileSaveDir = new File(this.location);
+                if (!fileSaveDir.exists()) {
+                    fileSaveDir.mkdirs();
+                }
+                this.status =CourseDaoSecond.insertCourseDetails(cname, cauthor, minDuration, fileName2, tlEntrylevel, tlpo, tlad, tlas, tmel, tmpo, tmad, tmas, mtlEntrylevel, mtlpo, mtlad, mtlas, mtmel, mtmpo, mtmad, mtmas, fileExtension, dm)  ;
+                PpttoPNG.insertPicture(fileName2);
+            } else if (fileExtension.equals("mp4")) {
+                System.out.println("FILE EXTENSION IS NOT FOUND" + fileExtension);
+                fileSaveDir = new File("C://Users//IBM_ADMIN//Desktop//Video");
+                if (!fileSaveDir.exists()) {
+                    fileSaveDir.mkdirs();
+                }
+                for (Part part2 : request.getParts()) {
+                    this.fileName = this.getFileName(part2);
+                    if (this.fileName == null || this.fileName.isEmpty()) continue;
+                    part2.write("C://Users//IBM_ADMIN//Desktop//Video" + File.separator + this.fileName);
+                }
+               this.status =CourseDaoSecond.insertCourseDetails(cname, cauthor, minDuration, fileName2, tlEntrylevel, tlpo, tlad, tlas, tmel, tmpo, tmad, tmas, mtlEntrylevel, mtlpo, mtlad, mtlas, mtmel, mtmpo, mtmad, mtmas, fileExtension, dm)  ;
+                System.out.println("STATUS OF INSERTION"+status);
+              
+            }
+            if (this.status > 0) {
+            	CourseDao dao = new CourseDao();
+            	request.setAttribute("courses", dao.getAllCourses());
+            	out.println("<script type=\"text/javascript\">");
+                out.println("alert('FIle Uploaded Sycessfully');");
+                out.println("</script>");
+                request.getRequestDispatcher("launchCourse.jsp").include(request, response);
+            }
+          
+        	
         }
-       ;
+        else{
+        	System.out.println("Else Block of Maindatory Check");
+        	out.println("<script type=\"text/javascript\">");
+            out.println("alert('Please Select Mandantory Field');");
+            out.println("</script>");
+            request.getRequestDispatcher("UploadCourse").include(request, response);
+        }
+        
+ 
     }
 
     private String getFileName(Part part) {
@@ -133,4 +146,6 @@ extends HttpServlet {
         }
         return "";
     }
+    
+   
 }

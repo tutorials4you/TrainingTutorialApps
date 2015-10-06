@@ -39,7 +39,7 @@
 				</tr>
 				
 				<!-- --***********************************Avilable ************************************** -->
-				<div id ="available">Available</div>
+				<div id ="available">Available For</div>
 				<tr id="userRole">
 					<td id="firsttd">
 						<div>
@@ -89,7 +89,7 @@
 						</div>
 					</td>
 		<!-- --***********************************Mandantory ************************************** -->
-					<div id ="mandantory">Mandantory</div>
+					<div id ="mandantory">Mandantory For</div>
 					<td id="firsttd">
 						<div>
 							<label id = testLeadlbl2>TEST LEAD</label>

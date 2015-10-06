@@ -5,5 +5,5 @@
 <%
 		String count = request.getParameter("ver");
 		out.println(count);
-		out.println("<img style='border:5px solid black;position: relative; bottom :73px; left:11%' width='70%' height='90%'  src=displayphoto?name=" +count+ "></img> <p/>");
+		out.println("<img style='border:5px solid black;position:absolute;bottom:41px!important; left:141px' width='1028px' height='550px'  src=displayphoto?name=" +count+ "></img> <p/>");
 %>
