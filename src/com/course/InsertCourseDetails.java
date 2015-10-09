@@ -101,14 +101,14 @@ extends HttpServlet {
                 PpttoPNG.insertPicture(fileName2);
             } else if (fileExtension.equals("mp4")) {
                 System.out.println("FILE EXTENSION IS NOT FOUND" + fileExtension);
-                fileSaveDir = new File("C://Users//IBM_ADMIN//Desktop//Video");
+                fileSaveDir = new File("C://Tomcat 7.0//webapps//video");
                 if (!fileSaveDir.exists()) {
                     fileSaveDir.mkdirs();
                 }
                 for (Part part2 : request.getParts()) {
                     this.fileName = this.getFileName(part2);
                     if (this.fileName == null || this.fileName.isEmpty()) continue;
-                    part2.write("C://Users//IBM_ADMIN//Desktop//Video" + File.separator + this.fileName);
+                    part2.write("C://Tomcat 7.0//webapps//video" + File.separator + this.fileName);
                 }
                this.status =CourseDaoSecond.insertCourseDetails(cname, cauthor, minDuration, fileName2, tlEntrylevel, tlpo, tlad, tlas, tmel, tmpo, tmad, tmas, mtlEntrylevel, mtlpo, mtlad, mtlas, mtmel, mtmpo, mtmad, mtmas, fileExtension, dm)  ;
                 System.out.println("STATUS OF INSERTION"+status);
