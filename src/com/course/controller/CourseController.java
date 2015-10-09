@@ -1,6 +1,8 @@
 package com.course.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -12,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.course.PictureCount;
 import com.course.dao.CourseDao;
 import com.course.model.CourseSecond;
 
@@ -20,6 +23,7 @@ public class CourseController extends HttpServlet {
     //private static String INSERT_OR_EDIT = "/user.jsp";
     private static String INSERT_OR_EDIT = "/editCourseDetails.jsp";
     private static String PASS_COURSE = "/indexToPass.jsp";
+    private static String Play_Video = "/video.jsp";
     private static String LIST_COURSES = "/courseDetails.jsp";
     private static String LAUNCH_COURSE = "/launchCourse.jsp";
    // private static String INSERT_OR_EDIT_NORMAL_USER = "/editCourse.jsp";
@@ -39,6 +43,8 @@ public class CourseController extends HttpServlet {
         HttpSession session = request.getSession(true);
         String userRole = session.getAttribute("userRole").toString();
         String action = request.getParameter("action");
+        response.setContentType("text/html;charset=UTF-8");
+        PrintWriter out = response.getWriter();
         System.out.println(action);
         if (action.equalsIgnoreCase("delete")&&userRole.equals("admin")){
             int cid = Integer.parseInt(request.getParameter("cid"));
@@ -63,9 +69,25 @@ public class CourseController extends HttpServlet {
             request.setAttribute("courses", dao.getAllCorsesforNormalUser(userRole));
         }else if (action.equalsIgnoreCase("launch")){
             String cid = request.getParameter("cid");
+            String email = (String) session.getAttribute("email");
+            try {
+				int status = PictureCount.updatePictureCount(cid,email);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
             System.out.println("**********"+action);
+            out.println("<script type=\"text/javascript\">");
+            out.println("alert('User or password incorrect');");
+            out.println("location='index.jsp';");
+            out.println("</script>");
             forward = PASS_COURSE+"?ver="+cid;
             session.setAttribute("cid",cid);  
+        }else if (action.equalsIgnoreCase("launchVideo")){
+            String fileName = request.getParameter("fileName");
+            System.out.println("**********"+action);
+            forward = Play_Video;
+            session.setAttribute("videoFile",fileName);  
         }else if (action.equalsIgnoreCase("launchNomal")&&userRole.equals("Manager")||userRole.equals("Test Analyst")||userRole.equals("Team Lead")){
             String cid = request.getParameter("cid");
             System.out.println("**********"+action);
