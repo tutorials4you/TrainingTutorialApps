@@ -113,6 +113,7 @@ public class CourseDao {
                     course.setCauthor(this.rs.getString("CAUTHOR"));
                     course.setCfileName(this.rs.getString("COURSEFILENAME"));
                     course.setCmin(this.rs.getString("MIN_DURATION"));
+                    course.setFileExtension(this.rs.getString("FILE_EXTENSION"));
                  //   course.set(this.rs.getDate("COURSEDATE"));
 
                     courses.add(course);
