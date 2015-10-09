@@ -104,8 +104,12 @@ CREATE SEQUENCE USERS_ID
   START WITH 1
   INCREMENT BY 1
   CACHE 20;
-  
-  
+ 
+CREATE Table Visit_Course_Details(
+Course_Id varchar2(20),
+current_page varchar2(20),
+user_namea varchar2(20)
+);
   ALTER DATABASE
  DATAFILE 'C:/oraclexe/oradata/XE/system.dbf'
 RESIZE 2048M;

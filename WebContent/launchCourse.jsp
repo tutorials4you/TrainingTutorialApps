@@ -36,8 +36,17 @@ th {
                     <td><c:out value="${course.cauthor}" /></td>
                     <td><c:out value="${course.cmin}" /></td>
                     <td><c:out value="${course.cfileName}" /></td>
-                   <td><a href="CourseController?action=launch&cid=<c:out value="${course.cid}"/>">LAUNCH</a></td>
-                   <td><a href="takeExam?test=javascript">ASSESMENT</a></td>
+                  <c:choose>
+ 				 <c:when test="${course.fileExtension=='pptx'}">
+  				 <td><a href="CourseController?action=launch&cid=<c:out value="${course.cid}"/>">LAUNCH</a></td>
+  				</c:when>
+ 				<c:otherwise>
+  				 <%System.out.print("TEST FOR VIDEO") ;%>
+  				 <td><a href="CourseController?action=launchVideo&fileName=<c:out value="${course.cfileName}"/>">LAUNCH</a></td>
+ 				</c:otherwise>
+				</c:choose>
+<%--                    <td><a href="CourseController?action=launch&cid=<c:out value="${course.cid}"/>">LAUNCH</a></td>
+ --%>                   <td><a href="takeExam?test=javascript">ASSESMENT</a></td>
                     </tr>
             </c:forEach>
         </tbody>
