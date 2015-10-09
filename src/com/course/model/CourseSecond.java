@@ -24,7 +24,16 @@ public class CourseSecond {
     String mtmpo;
     String mtmad;
     String mtmas;
-    public String getMtlEntrylevel() {
+    String fileExtension;
+    public String getFileExtension() {
+		return fileExtension;
+	}
+
+	public void setFileExtension(String fileExtension) {
+		this.fileExtension = fileExtension;
+	}
+
+	public String getMtlEntrylevel() {
 		return mtlEntrylevel;
 	}
 
