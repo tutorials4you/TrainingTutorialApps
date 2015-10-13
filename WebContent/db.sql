@@ -110,6 +110,27 @@ Course_Id varchar2(20),
 current_page varchar2(20),
 user_namea varchar2(20)
 );
+
+CREATE TABLE Assesments
+  (
+    Ass_Id         NUMBER(10),
+    questionNumber NUMBER(10),
+    question       VARCHAR2(1000),
+    answerOne      VARCHAR2(1000) ,
+    answerTwo      VARCHAR2(1000),
+    answerThree    VARCHAR2(1000),
+    answerFour     VARCHAR2(1000),
+    correctAnswer  NUMBER(10)
+  );
+  
+  
+   CREATE SEQUENCE Ass_Id
+  MINVALUE 1
+  MAXVALUE 999999999999999999999999999
+  START WITH 1
+  INCREMENT BY 1
+  CACHE 20;
+  
   ALTER DATABASE
  DATAFILE 'C:/oraclexe/oradata/XE/system.dbf'
 RESIZE 2048M;

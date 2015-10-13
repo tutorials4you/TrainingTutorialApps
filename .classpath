@@ -27,12 +27,19 @@
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/poi-examples-3.13-beta1-20150723.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/poi-excelant-3.13-beta1-20150723.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/poi-ooxml-3.13-beta1-20150723.jar"/>
-	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/poi-ooxml-3.9.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/poi-ooxml-schemas-3.13-beta1-20150723.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/poi-scratchpad-3.13-beta1-20150723.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/pop3.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/smtp.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/xmlbeans-2.6.0.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/org.eclipse.egit_4.1.0.201509170816.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/jdom.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/jsp-api.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/log4j.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/mysql.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/poi-3.9.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/poi-3.9(1).jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/servlet-api.jar"/>
+	<classpathentry kind="lib" path="C:/TrainingTool/CreateQuestion/WebContent/WEB-INF/lib/xerces.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

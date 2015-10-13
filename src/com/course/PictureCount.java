@@ -31,4 +31,26 @@ public class PictureCount {
 
 		return pictureCount;
 	}
+	
+	
+	public static int updatePictureCount(String courseId,String email) throws SQLException{
+		Connection con=ConProvider.getConnection();
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		String pictureCount =null;
+		try {
+			ps = con.prepareStatement("Select  CoursePicture_RECORD  where  CourseID  = ? and UserName = ");
+			ps.setString(1, courseId);
+			rs = ps.executeQuery();
+			rs.next();
+			pictureCount = rs.getString("PICTURE_COUNT");
+			System.out.println("******PICTURE COUNT CLASS******"+pictureCount);
+
+		} catch (Exception ex) {
+			System.out.println("Error in check() -->" + ex.getMessage());
+		} finally{
+			ConProvider.cleanUp(rs, ps, con);
+		}
+		return 0;
+	}
 }

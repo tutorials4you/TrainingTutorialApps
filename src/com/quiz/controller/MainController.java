@@ -2,6 +2,7 @@ package com.quiz.controller;
 
 import java.io.IOException;
 
+import javax.lang.model.element.Element;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -39,9 +40,14 @@ public class MainController extends HttpServlet {
 				try{
 					document=CreateDOM.getDOM(exam);
 
+					//request.getSession().setAttribute("totalNumberOfQuizQuestions",document.getElementsByTagName("totalQuizQuestions").item(0).getTextContent());
+					//request.getSession().setAttribute("quizDuration",document.getElementsByTagName("quizDuration").item(0).getTextContent());
+					//request.getSession().setAttribute("min",document.getElementsByTagName("quizDuration").item(0).getTextContent());
 					request.getSession().setAttribute("totalNumberOfQuizQuestions",document.getElementsByTagName("totalQuizQuestions").item(0).getTextContent());
 					request.getSession().setAttribute("quizDuration",document.getElementsByTagName("quizDuration").item(0).getTextContent());
 					request.getSession().setAttribute("min",document.getElementsByTagName("quizDuration").item(0).getTextContent());
+					
+					
 					request.getSession().setAttribute("sec",0);
 
 					System.out.println("Minutes "+request.getSession().getAttribute("min")+"---------------- sec   "+request.getSession().getAttribute("sec"));
