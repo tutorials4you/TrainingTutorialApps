@@ -6,26 +6,29 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
-public class Lab9 {
+public class XmlConvertor {
 
-	public static void main(String[] args) {
+	public static void ConvertTOXml(String fileName) {
 		try {
+			
+			@SuppressWarnings("unchecked")
+			List<String> assesmentId = ReteriveQuestion.getAssid(fileName);
+			String ass_Id = assesmentId.get(0);
 			System.out.println("Programe Start");
-			ReteriveQuestion reteriveQuestion =new ReteriveQuestion();
-			List<AssesmentDO>custlist=reteriveQuestion.getAllQuestion();
-
+			List<?> assDetailsById = ReteriveQuestion.getAssesmentDetailsById(ass_Id);
+			List<AssesmentDO>custlist=ReteriveQuestion.getAllQuestion(ass_Id);
 			Document doc=DOMUtil.createDocument();
 			
 			Element quizTest=doc.createElement("quiz");
 			doc.appendChild(quizTest);
 			
-			Element title=DOMUtil.createMyElement(doc, "title", "AVPN");
+			Element title=DOMUtil.createMyElement(doc, "title", assDetailsById.get(1).toString());
 			quizTest.appendChild(title);
 			
-			Element totalQuestions=DOMUtil.createMyElement(doc, "totalQuizQuestions", "10");
+			Element totalQuestions=DOMUtil.createMyElement(doc, "totalQuizQuestions", assDetailsById.get(3).toString());
 			quizTest.appendChild(totalQuestions);
 			
-			Element testDuration=DOMUtil.createMyElement(doc, "quizDuration", "2");
+			Element testDuration=DOMUtil.createMyElement(doc, "quizDuration", assDetailsById.get(2).toString());
 			quizTest.appendChild(testDuration);
 			
 			Element root=doc.createElement("questions");
@@ -58,7 +61,10 @@ public class Lab9 {
 
 
 			}
+			System.out.println("XML CREATED ");
+
 			DOMUtil.printTOFile(doc, "mycust.xml");
+			System.out.println("XML CREATED DONE");
 
 
 

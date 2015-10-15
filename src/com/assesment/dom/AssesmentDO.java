@@ -14,9 +14,16 @@ public class AssesmentDO {
 	private String optThree;
 	private String optFour;
 	private String corrAnswer;
+	private String ass_duration;
 	
 	
 	
+	public String getAss_duration() {
+		return ass_duration;
+	}
+	public void setAss_duration(String ass_duration) {
+		this.ass_duration = ass_duration;
+	}
 	public int getQuestionNumber() {
 		return questionNumber;
 	}

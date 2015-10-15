@@ -26,9 +26,6 @@ public class CourseController extends HttpServlet {
     private static String Play_Video = "/video.jsp";
     private static String LIST_COURSES = "/courseDetails.jsp";
     private static String LAUNCH_COURSE = "/launchCourse.jsp";
-   // private static String INSERT_OR_EDIT_NORMAL_USER = "/editCourse.jsp";
-   // private static String PASS_COURSE_NORMAL_USER = "/indexToPass.jsp";
-   // private static String LIST_COURSES_NORMAL_USER = "/courseDetails.jsp";
     private static String LAUNCH_COURSE_NORMAL_USER = "/launchCourseNormalUser.jsp";
     
     private CourseDao dao;

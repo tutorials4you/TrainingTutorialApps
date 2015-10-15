@@ -120,7 +120,8 @@ CREATE TABLE Assesments
     answerTwo      VARCHAR2(1000),
     answerThree    VARCHAR2(1000),
     answerFour     VARCHAR2(1000),
-    correctAnswer  NUMBER(10)
+    correctAnswer  NUMBER(10),
+    Ass_time number(10)
   );
   
   

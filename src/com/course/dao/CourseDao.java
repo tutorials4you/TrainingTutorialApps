@@ -169,8 +169,7 @@ public class CourseDao {
     }
 
     public CourseSecond getCourseById(int cid) {
-        CourseSecond course;
-        course = new CourseSecond();
+        CourseSecond course = new CourseSecond();
         try {
             try {
                 this.connection = ConProvider.getConnection();

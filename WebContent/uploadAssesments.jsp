@@ -14,32 +14,32 @@
 <body>
 	<div class="inputform" style="float: left;">
 		<h2 class="design">Upload Assesment</h2>
-		<form action="InsertCourseDetails" method="post" enctype="multipart/form-data">
+		<form action="InsertAssesmentDetail" method="post" enctype="multipart/form-data">
 		<table>
 		<tr id =coursename>
 		<td >Assesments Name:</td>
-		<td id="coursenametestBox"><input type="text" id="email" name="cname"/>
+		<td id="coursenametestBox"><input type="text" id="email" name="assesmentName"/>
 		</td>
 		</tr>
 		<tr id = courseauthor>
 		<td>Time Limit</td>
-		<td id ="courseauthorTextBox"><input id="password" type="text" name="cauthor"
+		<td id ="courseauthorTextBox"><input id="password" type="text" name="timeLimit"
 		/></td>
-		</tr>
-		<tr>
-		<select name="empno">
-        <option>
-       <c:forEach items="${result.}" var="actualbean">  
-       <option value="${actualbean.value}"><c:out value="${actualbean.value}"/></option>  
-       </c:forEach>                 
-            </option>
-
-        </select>
-		
 		</tr>
 		<tr id= courseFIle>
 		<td>File:</td>
 		<td id =courseFIlebox><input id="password" type="file" name="file" /></td>
+		</tr>
+		<tr id =courseIdLabel>
+		<td>Course Id :</td>
+		<td>
+		<select  id="courseId" name ="courseId">
+				<option >Select Course Id</option>
+				<c:forEach var="x" items="${requestScope.courseId}">
+							<option >${x}</option>
+				</c:forEach>
+		</select>
+		</td>
 		</tr>
 		<tr id=button>
 		<td><input id="register" type="reset" value="Reset" />
