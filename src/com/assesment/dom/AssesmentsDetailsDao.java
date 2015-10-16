@@ -3,6 +3,24 @@ package com.assesment.dom;
 public class AssesmentsDetailsDao {
 	
 	private String assTitle;
+	private String assDuration;
+	private String  totalQue;
+	private String  assesmentsId;
+	private String  courseId;
+
+	
+	public String getCourseId() {
+		return courseId;
+	}
+	public void setCourseId(String courseId) {
+		this.courseId = courseId;
+	}
+	public String getAssesmentsId() {
+		return assesmentsId;
+	}
+	public void setAssesmentsId(String assesmentsId) {
+		this.assesmentsId = assesmentsId;
+	}
 	public String getAssTitle() {
 		return assTitle;
 	}
@@ -21,8 +39,7 @@ public class AssesmentsDetailsDao {
 	public void setTotalQue(String totalQue) {
 		this.totalQue = totalQue;
 	}
-	private String assDuration;
-	private String  totalQue;
+	
 	
 
 }

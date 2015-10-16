@@ -2,6 +2,9 @@ package com.course;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -11,7 +14,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 import org.apache.commons.io.FilenameUtils;
-import com.assesment.dom.ReteriveQuestion;
+import com.assesment.dom.AssesmentDao;
+import com.assesment.dom.AssesmentsDetailsDao;
 import com.assesment.dom.XmlConvertor;
 import com.test.Assesment;
 
@@ -45,7 +49,7 @@ public class InsertAssesmentDetailFromVIew extends HttpServlet {
             if (!fileSaveDir.exists()) {
                 fileSaveDir.mkdirs();
             }     
-            this.status=ReteriveQuestion.insertAssesmenDetails(assesmentName, timeLimit, courseId, fileName2);
+            this.status=AssesmentDao.insertAssesmenDetails(assesmentName, timeLimit, courseId, fileName2);
             try {
 				this.status2 = Assesment.insertQuestion(fileName2,courseId,assesmentName);
 			} catch (Exception e) {
@@ -68,8 +72,17 @@ public class InsertAssesmentDetailFromVIew extends HttpServlet {
             	out.println("<script type=\"text/javascript\">");
             	out.println("alert('FIle Uploaded Sycessfully');");
                 out.println("</script>");
-               // XmlConvertor.ConvertTOXml(fileName2);
-        	 request.getRequestDispatcher("launchCourse.jsp").include(request, response);
+                AssesmentDao assesmentDao = new AssesmentDao();
+                @SuppressWarnings("unused")
+				List<AssesmentsDetailsDao> assesmentDaoDetails = new ArrayList<AssesmentsDetailsDao>();
+                try {
+					assesmentDaoDetails = assesmentDao.getAllAssesments();
+					request.setAttribute("assesments", assesmentDaoDetails);
+				} catch (SQLException e) {
+				System.out.println("From Insert Assesment Details From View Class");
+				}
+                
+        	 request.getRequestDispatcher("assesmentsDetails.jsp").include(request, response);
             }
         }
     private String getFileName(Part part) {

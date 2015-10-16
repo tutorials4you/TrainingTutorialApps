@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.assesment.dom.AssesmentDao;
 import com.course.PictureCount;
 import com.course.dao.CourseDao;
 import com.course.dao.UsersDao;
@@ -23,21 +24,18 @@ import com.course.model.Users;
 public class AssesmentController extends HttpServlet {
     private static final long serialVersionUID = 1L;
     //private static String INSERT_OR_EDIT = "/user.jsp";
-    private static String INSERT_OR_EDIT = "/editCourseDetails.jsp";
+    private static String INSERT_OR_EDIT = "/editAssesment.jsp";
     private static String PASS_COURSE = "/indexToPass.jsp";
     private static String Play_Video = "/video.jsp";
-    private static String LIST_COURSES = "/courseDetails.jsp";
+    private static String LIST_OF_ASSESMENTS = "/assesmentsDetails.jsp";
     private static String LAUNCH_COURSE = "/launchCourse.jsp";
-   // private static String INSERT_OR_EDIT_NORMAL_USER = "/editCourse.jsp";
-   // private static String PASS_COURSE_NORMAL_USER = "/indexToPass.jsp";
-   // private static String LIST_COURSES_NORMAL_USER = "/courseDetails.jsp";
     private static String LAUNCH_COURSE_NORMAL_USER = "/launchCourseNormalUser.jsp";
     
-    private CourseDao dao;
+    private AssesmentDao dao;
 
     public AssesmentController() {
         super();
-        dao = new CourseDao();
+        dao = new AssesmentDao();
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -50,25 +48,32 @@ public class AssesmentController extends HttpServlet {
         System.out.println(action);
         if (action.equalsIgnoreCase("delete")&&userRole.equals("admin")){
             int cid = Integer.parseInt(request.getParameter("cid"));
-            dao.deleteCourse(cid);
-            forward = LIST_COURSES;
-            request.setAttribute("courses", dao.getAllCourses()); 
+           // dao.deleteCourse(cid);
+            forward = LIST_OF_ASSESMENTS;
+            try {
+				request.setAttribute("assesments", dao.getAllAssesments());
+			} catch (SQLException e) {
+				System.err.println("Get All Assesments");
+			} 
         } else if (action.equalsIgnoreCase("edit")&&userRole.equals("admin")){
             forward = INSERT_OR_EDIT;
             int cid = Integer.parseInt(request.getParameter("cid"));
-            CourseSecond course = dao.getCourseById(cid);
-            request.setAttribute("course", course);
-        } else if (action.equalsIgnoreCase("listOfCourse")&&(userRole.equals("admin"))){
-            forward = LIST_COURSES;
-            request.setAttribute("courses", dao.getAllCourses());
-            System.out.println(dao.getAllCourses());
+          //  CourseSecond course = dao.getCourseById(cid);
+          //  request.setAttribute("course", course);
+        } else if (action.equalsIgnoreCase("listOfAssesments")&&(userRole.equals("admin"))){
+            forward = LIST_OF_ASSESMENTS;
+            try {
+				request.setAttribute("assesments", dao.getAllAssesments());
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
         }else if (action.equalsIgnoreCase("launchCourse")&&(userRole.equals("admin"))){
             forward = LAUNCH_COURSE;
-            request.setAttribute("courses", dao.getAllCourses());
-            System.out.println(dao.getAllCourses());
+          //  request.setAttribute("courses", dao.getAllCourses());
         }else if (action.equalsIgnoreCase("launchCourse")&&(userRole.equals("Test Manager")||userRole.equals("Test Analyst")||userRole.equals("Team Lead"))){
             forward = LAUNCH_COURSE_NORMAL_USER;
-            request.setAttribute("courses", dao.getAllCorsesforNormalUser(userRole));
+          //  request.setAttribute("courses", dao.getAllCorsesforNormalUser(userRole));
         }else if (action.equalsIgnoreCase("launch")){
             String cid = request.getParameter("cid");
             String email = (String) session.getAttribute("email");
@@ -131,11 +136,14 @@ public class AssesmentController extends HttpServlet {
         {
         	System.out.println("IF BLOCK OF POST");
             course.setCid(courseId);
-            dao.checkCourse(course);
+            //dao.checkCourse(course);
         }
         
-    	RequestDispatcher view = request.getRequestDispatcher(LIST_COURSES);
-        request.setAttribute("courses", dao.getAllCourses());
+    	RequestDispatcher view = request.getRequestDispatcher(LIST_OF_ASSESMENTS);
+        try {
+			request.setAttribute("assesments", dao.getAllAssesments());
+		} catch (SQLException e) {
+			System.err.println("From Las Line of Assesments Controller Class");		}
         view.forward(request, response);
     }
 }

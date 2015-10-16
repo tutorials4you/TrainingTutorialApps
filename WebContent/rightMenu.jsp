@@ -72,8 +72,8 @@ function swap(targetId){
                 <a href="#" onclick="swap('sectionTwoLinks');return false;">ASSESMENTS</a>
                 <ul id="sectionTwoLinks" style="display: none;">
                   <li><a href="UploadAssesment">UPLOAD ASSESMENTS</a></li>
+                   <li><a href="AssesmentController?action=listOfAssesments">VIEW All  ASSESMENTS</a></li>
                   <li><a href="#">EDIT ASSESMENTS</a></li>
-                   <li><a href="#">VIEW ASSESMENTS</a></li>
                   
                  </ul>
             </li>

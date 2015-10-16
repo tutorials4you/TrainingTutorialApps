@@ -12,11 +12,11 @@ public class XmlConvertor {
 		try {
 			
 			@SuppressWarnings("unchecked")
-			List<String> assesmentId = ReteriveQuestion.getAssid(fileName);
+			List<String> assesmentId = AssesmentDao.getAssid(fileName);
 			String ass_Id = assesmentId.get(0);
 			System.out.println("Programe Start");
-			List<?> assDetailsById = ReteriveQuestion.getAssesmentDetailsById(ass_Id);
-			List<AssesmentDO>custlist=ReteriveQuestion.getAllQuestion(ass_Id);
+			List<?> assDetailsById = AssesmentDao.getAssesmentDetailsById(ass_Id);
+			List<AssesmentDO>custlist=AssesmentDao.getAllQuestion(ass_Id);
 			Document doc=DOMUtil.createDocument();
 			
 			Element quizTest=doc.createElement("quiz");
@@ -63,7 +63,7 @@ public class XmlConvertor {
 			}
 			System.out.println("XML CREATED ");
 
-			DOMUtil.printTOFile(doc, "mycust.xml");
+			DOMUtil.printTOFile(doc, "C://Tomcat 7.0//webapps//video//"+assesmentId.get(1).toString()+".xml");
 			System.out.println("XML CREATED DONE");
 
 

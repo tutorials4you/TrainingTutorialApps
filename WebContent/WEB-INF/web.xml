@@ -16,6 +16,14 @@
     <servlet-name>UserController</servlet-name>
     <url-pattern>/UserController</url-pattern>
   </servlet-mapping>
+   <servlet>
+    <servlet-name>AssesmentsController</servlet-name>
+    <servlet-class>com.course.controller.AssesmentController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AssesmentsController</servlet-name>
+    <url-pattern>/AssesmentController</url-pattern>
+  </servlet-mapping>
   <session-config>
     <session-timeout>30</session-timeout>
   </session-config>

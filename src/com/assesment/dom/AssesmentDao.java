@@ -8,9 +8,10 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.course.model.CourseSecond;
 import com.point.Formatter;
 import com.test.ConProvider;
-public class ReteriveQuestion {
+public class AssesmentDao {
 	static Connection connection = null;
 	private static PreparedStatement ps = null;
 	private static ResultSet rs = null;
@@ -41,11 +42,11 @@ public class ReteriveQuestion {
 		}
 		catch (SQLException e) {
 		e.printStackTrace();
-		ConProvider.cleanUp((ResultSet)rs, (Statement)statement, (Connection)ReteriveQuestion.connection);
+		ConProvider.cleanUp((ResultSet)rs, (Statement)statement, (Connection)AssesmentDao.connection);
 			}
 		}
 		finally {
-			ConProvider.cleanUp((ResultSet)rs, (Statement)statement, (Connection)ReteriveQuestion.connection);
+			ConProvider.cleanUp((ResultSet)rs, (Statement)statement, (Connection)AssesmentDao.connection);
 		}
 		return courses;
 	}
@@ -54,7 +55,7 @@ public class ReteriveQuestion {
 		try {
 			try {
 				connection = ConProvider.getConnection();
-				statement = ReteriveQuestion.connection.createStatement();
+				statement = AssesmentDao.connection.createStatement();
 				rs = statement.executeQuery("select CID from COURSE_DETAILS_RECORD");
 				while (rs.next()) {
 					//AssesmentDO assesment = new AssesmentDO();
@@ -138,7 +139,7 @@ public class ReteriveQuestion {
 			}
 			catch (SQLException e) {
 				e.printStackTrace();
-				ConProvider.cleanUp((ResultSet)rs, (Statement)statement, (Connection)ReteriveQuestion.connection);
+				ConProvider.cleanUp((ResultSet)rs, (Statement)statement, (Connection)AssesmentDao.connection);
 			}
 		}
 		finally {
@@ -168,16 +169,39 @@ public class ReteriveQuestion {
 			}
 			catch (SQLException e) {
 				e.printStackTrace();
-				ConProvider.cleanUp((ResultSet)rs, (Statement)statement, (Connection)ReteriveQuestion.connection);
+				ConProvider.cleanUp((ResultSet)rs, (Statement)statement, (Connection)AssesmentDao.connection);
 			}
 		}
 		finally {
-			ConProvider.cleanUp((ResultSet)rs, (Statement)statement, (Connection)ReteriveQuestion.connection);
+			ConProvider.cleanUp((ResultSet)rs, (Statement)statement, (Connection)AssesmentDao.connection);
 		}
 		System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"+courseBetailsById );
 		return courseBetailsById;
 	}
-	
+	   public ArrayList<AssesmentsDetailsDao> getAllAssesments() throws SQLException {
+	        ArrayList<AssesmentsDetailsDao> assesmentsDetails = new ArrayList<AssesmentsDetailsDao>();
+	        
+	            try {
+	                connection = ConProvider.getConnection();
+	                statement = AssesmentDao.connection.createStatement();
+	                rs = statement.executeQuery("select ass_id,ass_name,ass_duration,ass_courseId,max(max_qno) as max_qno from (SELECT a.assesment_id AS Ass_Id,a.assesments_name   AS Ass_Name,a.exam_duration     AS Ass_Duration,a.course_id     AS ass_courseId,b.questionnumber    AS max_qno  FROM assesment_details a LEFT OUTER JOIN assesments b ON (a.assesment_id  =b.ass_id)) group by ass_id,ass_name,ass_duration,ass_courseId order by ass_id");
+	                while (AssesmentDao.rs.next()) {
+	                	AssesmentsDetailsDao assesmentsDetailsDao = new AssesmentsDetailsDao();
+	                	assesmentsDetailsDao.setAssesmentsId(AssesmentDao.rs.getString("ass_id"));
+	                	assesmentsDetailsDao.setAssTitle(AssesmentDao.rs.getString("ass_name"));
+	                	assesmentsDetailsDao.setAssDuration(AssesmentDao.rs.getString("ass_duration"));
+	                	assesmentsDetailsDao.setCourseId(AssesmentDao.rs.getString("ass_courseId"));
+	                	assesmentsDetailsDao.setTotalQue(AssesmentDao.rs.getString("max_qno"));
+	                    assesmentsDetails.add(assesmentsDetailsDao);
+	                }
+	            
+	          
+	        }
+	        finally {
+	            ConProvider.cleanUp((ResultSet)AssesmentDao.rs, (Statement)AssesmentDao.statement, (Connection)AssesmentDao.connection);
+	        }
+	        return assesmentsDetails;
+	    }
 }
 
 

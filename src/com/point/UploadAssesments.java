@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.assesment.dom.ReteriveQuestion;
+import com.assesment.dom.AssesmentDao;
 @WebServlet("/UploadAssesment")
 public class UploadAssesments extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -26,7 +26,7 @@ public class UploadAssesments extends HttpServlet {
 			response.sendRedirect("index.html");
 		}else{
 		
-			ReteriveQuestion reteriveQuestion =new ReteriveQuestion();
+			AssesmentDao reteriveQuestion =new AssesmentDao();
 			request.setAttribute("courseId", reteriveQuestion.getAllCourseID());
 			//System.out.println("COURSE ID  "+reteriveQuestion.getAllCourseID());
 			request.getRequestDispatcher("uploadAssesments.jsp").include(request, response);

@@ -23,8 +23,9 @@ public class CreateDOM {
 	{
 		    Document dom=null;
 		    File quizFile=null;
-		    
-	        quizFile=new File("C:\\quizzes\\"+test+"-quiz-1.xml");
+	        quizFile=new File("C://Tomcat 7.0//webapps//video//"+test+".xml");
+
+	        //quizFile=new File("C:\\quizzes\\"+test+"-quiz-1.xml");
 	        System.out.println("Quiz File Absolute Path "+quizFile.getAbsolutePath());
 	         
 	   DocumentBuilderFactory dbf=DocumentBuilderFactory.newInstance();
