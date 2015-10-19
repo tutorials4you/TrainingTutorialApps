@@ -25,12 +25,10 @@ public class Exam {
 	
 	public Exam(String test) throws SAXException,ParserConfigurationException,IOException, URISyntaxException{
 		dom=CreateDOM.getDOM(test);
-		System.out.println("TEST FOR GIT HUB");
 	}
-	
-		
 	public void setQuestion(int i)
-	{   int number=i;
+	{
+		int number=i;
 		String options[]=new String[4];
 	    String question=null;
 	    int correct=0;

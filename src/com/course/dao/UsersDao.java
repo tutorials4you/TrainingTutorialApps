@@ -67,7 +67,7 @@ public class UsersDao {
 	public void deleteUser(int  userId) {
 		try {
 			connection = ConProvider.getConnection();
-			PreparedStatement preparedStatement = connection.prepareStatement("delete from COMPANY_MAILER_USER where USERID=?");
+			PreparedStatement preparedStatement = connection.prepareStatement("delete from TRAINING_TOOL_USERS where USERID=?");
 			preparedStatement.setInt(1, userId);
 			preparedStatement.executeUpdate();
 
@@ -113,7 +113,7 @@ public class UsersDao {
 		try {
 			connection = ConProvider.getConnection();
 			System.out.println("UPDATE USER PROFILE");
-			PreparedStatement preparedStatement = connection.prepareStatement("update COMPANY_MAILER_USER set NAME=?, EMAIL=?, PASSWORD=?, GENDER=?,DOB=?, ADDRESSLINE=?, CITY =?, STATE =?, CONTACT =?"
+			PreparedStatement preparedStatement = connection.prepareStatement("update TRAINING_TOOL_USERS set NAME=?, EMAIL=?, PASSWORD=?, GENDER=?,DOB=?, ADDRESSLINE=?, CITY =?, STATE =?, CONTACT =?"
 					+ "where USERID=?");
 			System.out.println("Update Users Records");
 			preparedStatement.setString(1,user.getUsername());
@@ -140,20 +140,14 @@ public class UsersDao {
 		try {
 			connection = ConProvider.getConnection();
 			statement = connection.createStatement();
-			rs = statement.executeQuery("select * from COMPANY_MAILER_USER");
+			rs = statement.executeQuery("select * from TRAINING_TOOL_USERS");
 			while (rs.next()) {
 				Users user = new Users();
-				user.setUserid(rs.getInt("USERID"));
-				user.setUsername(rs.getString("NAME"));
-				user.setUserEmail(rs.getString("EMAIL"));
-				user.setPassword(rs.getString("PASSWORD"));
-				user.setGender(rs.getString("GENDER"));
-				user.setDob(rs.getString("DOB"));
-				user.setAddressLine(rs.getString("ADDRESSLINE"));
-				user.setCity(rs.getString("CITY"));
-				user.setState(rs.getString("STATE"));
+				user.setUserid(rs.getInt("userid"));
+				user.setUsername(rs.getString("name"));
+				user.setUserEmail(rs.getString("email"));
+				user.setPassword(rs.getString("password"));
 				user.setUserRole(rs.getString("USER_ROLE"));
-				user.setContactNumber(rs.getLong("CONTACT"));
 				user.setRegisterDate(rs.getDate("REGISTEREDDATE"));
 				user.setUserAccess(rs.getString("AUTHORIZED"));
 				users.add(user);

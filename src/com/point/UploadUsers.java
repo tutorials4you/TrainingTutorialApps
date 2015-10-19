@@ -11,8 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.assesment.dom.AssesmentDao;
-@WebServlet("/UploadAssesment")
-public class UploadAssesments extends HttpServlet {
+import com.course.dao.UsersDao;
+@WebServlet("/UploadUsers")
+public class UploadUsers extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");
@@ -25,11 +26,11 @@ public class UploadAssesments extends HttpServlet {
 		if(session==null){
 			response.sendRedirect("index.html");
 		}else{
-		
-		//	AssesmentDao reteriveQuestion =new AssesmentDao();
-			//request.setAttribute("courseId", reteriveQuestion.getAllCourseID());
+
+		 //   UsersDao reteriveAllUsers  =new UsersDao();
+		//	request.setAttribute("usersList", reteriveAllUsers.getAllUsers());
 			//System.out.println("COURSE ID  "+reteriveQuestion.getAllCourseID());
-			request.getRequestDispatcher("uploadAssesments.jsp").include(request, response);
+			request.getRequestDispatcher("uploadUsers.jsp").include(request, response);
 			String msg=(String)request.getAttribute("msg");
 			if(msg!=null){
 				out.print("<p>"+msg+"</p>");

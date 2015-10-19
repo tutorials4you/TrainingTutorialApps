@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -16,11 +17,11 @@ import org.apache.commons.io.FilenameUtils;
 import com.assesment.dom.AssesmentDao;
 import com.assesment.dom.AssesmentsDetailsDao;
 import com.assesment.dom.XmlConvertor;
-import com.test.Assesment;
-
-@WebServlet(value={"/InsertAssesmentDetail"})
+import com.course.dao.UsersDao;
+import com.test.UserRecordFromExcelToDatabase;
+@WebServlet(value={"/UploadUserFromView"})
 @MultipartConfig(fileSizeThreshold=10485760, maxFileSize=52428800, maxRequestSize=104857600)
-public class InsertAssesmentDetailFromVIew extends HttpServlet {
+public class UploadUserFromView extends HttpServlet {
 	int status,status2;
 	String fileName;
 	String location = "C://Users//IBM_ADMIN//Desktop//Upload";
@@ -33,9 +34,7 @@ public class InsertAssesmentDetailFromVIew extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		response.setContentType("text/html");
 		response.getWriter();
-		String assesmentName = request.getParameter("assesmentName");
-		String timeLimit = request.getParameter("timeLimit");
-		String courseId = request.getParameter("courseId");
+
 		for (Part part : request.getParts()) {
 			this.fileName = this.getFileName(part);
 			if (this.fileName == null || this.fileName.isEmpty()) continue;
@@ -48,32 +47,23 @@ public class InsertAssesmentDetailFromVIew extends HttpServlet {
 			if (!fileSaveDir.exists()) {
 				fileSaveDir.mkdirs();
 			}     
-			this.status=AssesmentDao.insertAssesmenDetails(assesmentName, timeLimit, courseId, fileName2);
+			//    this.status=AssesmentDao.insertAssesmenDetails(assesmentName, timeLimit, courseId, fileName2);
 			try {
-				this.status2 = Assesment.insertQuestion(fileName2,courseId,assesmentName);
+				this.status = UserRecordFromExcelToDatabase.insertUsers(fileName2);
+				//	this.status2 = Assesment.insertQuestion(fileName2,courseId,assesmentName);
 			} catch (Exception e) {
+				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		}  
-		if (this.status > 0 && status2 > 0) {
-			XmlConvertor.ConvertTOXml(fileName2);
-			System.out.println("Mail Id "+fileName2);
-			//CourseDao dao = new CourseDao();
-			//request.setAttribute("courses", dao.getAllCourses());
+		} 
+		if (this.status > 0 ) {
+			
 			out.println("<script type=\"text/javascript\">");
 			out.println("alert('FIle Uploaded Sycessfully');");
 			out.println("</script>");
-			AssesmentDao assesmentDao = new AssesmentDao();
-			@SuppressWarnings("unused")
-			List<AssesmentsDetailsDao> assesmentDaoDetails = new ArrayList<AssesmentsDetailsDao>();
-			try {
-				assesmentDaoDetails = assesmentDao.getAllAssesments();
-				request.setAttribute("assesments", assesmentDaoDetails);
-			} catch (SQLException e) {
-				System.out.println("From Insert Assesment Details From View Class");
-			}
-
-			request.getRequestDispatcher("assesmentsDetails.jsp").include(request, response);
+			UsersDao reteriveAllUsers  =new UsersDao();
+			request.setAttribute("users", reteriveAllUsers.getAllUsers());
+			request.getRequestDispatcher("manageUserRecord.jsp").include(request, response);
 		}
 	}
 	private String getFileName(Part part) {
