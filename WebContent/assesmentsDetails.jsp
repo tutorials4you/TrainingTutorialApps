@@ -35,14 +35,7 @@ th {
 					<td><c:out value="${assesment.assDuration}" /></td>
 					<td><c:out value="${assesment.courseId}" /></td>
 					<td><c:out value="${assesment.totalQue}" /></td>
-					
-<%-- 					<td><c:out value="${assesment.cauthor}" /></td>
- --%>					<td><a
-						href="AssesmentController?action=edit&cid=<c:out value="${assesment.assesmentsId}"/>">Edit</a>
-					</td>
-					<td><a
-						href="AssesmentController?action=delete&cid=<c:out value="${assesment.assesmentsId}"/>">Delete</a>
-					</td>
+ 					<td><a href="takeExam?test=<c:out value="${assesment.courseId}"/>">View</a>	</td>
 				</tr>
 			</c:forEach>
 		</tbody>

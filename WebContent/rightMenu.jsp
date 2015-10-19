@@ -80,7 +80,7 @@ function swap(targetId){
             <li>
                 <a href="#" onclick="swap('sectionThreeLinks');return false;">USERS</a>
                 <ul id="sectionThreeLinks" style="display: none;">
-                  <li><a href="UserController?action=listUser">EDIT USERS</a></li>
+                   <li><a href="UploadUsers">UPLOAD USERS</a></li>
                   <li><a href="UserController?action=manageUserRecord">MANAGE USERS</a></li>
                   <li><a href="UserController?action=deleteUserRecord">DELETE USERS</a></li>
                   

@@ -45,10 +45,7 @@ th {
   				 <td><a href="CourseController?action=launchVideo&fileName=<c:out value="${course.cfileName}"/>">LAUNCH</a></td>
  				</c:otherwise>
 				</c:choose>
-<%--                    <td><a href="CourseController?action=launch&cid=<c:out value="${course.cid}"/>">LAUNCH</a></td>
- --%>                   <!-- <td><a href="takeExam?test=javascript">ASSESMENT</a></td> -->
                     <td><a href="takeExam?test=<c:out value="${course.cid}"/>">ASSESMENT</a></td>
- 
                     </tr>
             </c:forEach>
         </tbody>

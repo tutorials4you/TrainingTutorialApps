@@ -18,8 +18,8 @@ th {
 <jsp:include page="rightMenu.jsp" />
     <table border=1>
         <thead>
-            <tr>
-                <th bgcolor ="yellow">USER ID</th>
+            <tr bgcolor ="yellow">
+                <th >USER ID</th>
                 <th>NAME</th>
                 <th>EMAIL</th>
                  <th>USER ROLE</th>

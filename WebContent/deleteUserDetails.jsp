@@ -13,20 +13,12 @@
 <jsp:include page="rightMenu.jsp" />
     <table border=1>
         <thead>
-            <tr>
-                <th bgcolor ="yellow">USER ID</th>
+            <tr bgcolor ="#0099CC">
+                <th >USER ID</th>
                 <th>NAME</th>
-                <th>EMAIL</th>
+                <th>Att Id</th>
                 <th>PASSWORD</th>
-                <th>GENDER</th>
-                <th>ADDRESS LINE</th>
-                <th>CITY</th>
-                <th>STATE</th>
-                <th>DOB</th>
-<!--                 <th>USER ROLE</th>
- -->                <th>CONTACT NO</th><!-- 
-                <th>REGISTER DATE</th>
-                <th>USER ACCESS</th> -->
+                <th>User Role</th>
                 <th colspan=2>Action</th>
             </tr>
         </thead>
@@ -37,16 +29,7 @@
                     <td><c:out value="${user.username}" /></td>
                     <td><c:out value="${user.userEmail}" /></td>
                     <td><c:out value="${user.password}" /></td>
-                    <td><c:out value="${user.gender}" /></td>
-                    <td><c:out value="${user.addressLine}" /></td>
-                    <td><c:out value="${user.city}" /></td>
-                    <td><c:out value="${user.state}" /></td>
-                    <td><c:out value="${user.dob}" /></td>
-<%--                     <td><c:out value="${user.userRole}" /></td>
- --%>                    <td><c:out value="${user.contactNumber}" /></td>
-<%--                     <td><c:out value="${user.registerDate}" /></td>
-                    <td><c:out value="${user.userAccess}" /></td>
- --%>                   <%--  <td><a href="UserController?action=editUser&userId=<c:out value="${user.userid}"/>">Update</a></td> --%>
+                    <td><c:out value="${user.userRole}" /></td>
                      <td><a href="UserController?action=deleteUser&userId=<c:out value="${user.userid}"/>">Delete</a></td>
                 </tr>
             </c:forEach>

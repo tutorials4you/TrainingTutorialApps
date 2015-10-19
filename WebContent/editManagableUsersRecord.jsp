@@ -72,9 +72,11 @@
 				<tr>
 					<td>User Role:</td>
 					<td><select name="userRole">
-							<option>Test Analyst</option>
-							<option>Team Lead</option>
-							<option>Test Manager</option>
+						<option >Select User Role </option>
+							<option>Entry Level</option>
+							<option>PO</option>
+							<option>AD</option>
+							<option>AS</option>
 
 					</select></td>
 					<td>${user.userRole}</td>

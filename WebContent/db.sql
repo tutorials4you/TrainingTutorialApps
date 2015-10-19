@@ -92,7 +92,7 @@ CREATE SEQUENCE COURSE_ID
     userid         NUMBER(11) NOT NULL ,
     name           VARCHAR(45) DEFAULT NULL,
     email          VARCHAR(100) Unique,
-    password       VARCHAR(200) Not NULL,
+    password       VARCHAR(200) not null,
     User_Role      VARCHAR2(20),
     registereddate DATE,
     authorized     VARCHAR2(50),
