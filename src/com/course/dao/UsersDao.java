@@ -4,7 +4,6 @@ import java.sql.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
-
 import com.course.model.Users;
 import com.point.ConProvider;
 public class UsersDao {
@@ -13,9 +12,6 @@ public class UsersDao {
 	ResultSet rs=null;
 	Statement statement = null;
 	PreparedStatement preparedStatement = null;
-	/*public UsersDao() {
-		connection = ConProvider.getConnection();
-	}*/
 	public void checkUser(Users users) {
 		try {
 			connection = ConProvider.getConnection();
@@ -96,11 +92,12 @@ public class UsersDao {
 		try {
 			connection = ConProvider.getConnection();
             System.out.println("QUERY UPDATE USERS RECORDS"+user.getUserRole()+"\t"+user.getUserAccess());
-			PreparedStatement preparedStatement = connection.prepareStatement("update training_tool_users SET USER_ROLE =?, AUTHORIZED = ?"
+			PreparedStatement preparedStatement = connection.prepareStatement("update training_tool_users SET USER_ROLE =?, AUTHORIZED = ? ,User_Sub_Role =?"
 					+ "where USERID=?");
 			preparedStatement.setString(1, user.getUserRole());
 			preparedStatement.setString(2, user.getUserAccess());
-			preparedStatement.setInt(3, user.getUserid());
+			preparedStatement.setString(3, user.getUserSubRole());
+			preparedStatement.setInt(4, user.getUserid());
 			preparedStatement.executeUpdate();
 
 		} catch (SQLException e) {
@@ -134,7 +131,6 @@ public class UsersDao {
 			ConProvider.cleanUp(preparedStatement, connection);
 		}
 	}
-
 	public List<Users> getAllUsers() {
 		List<Users> users = new ArrayList<Users>();
 		try {
@@ -148,6 +144,7 @@ public class UsersDao {
 				user.setUserEmail(rs.getString("email"));
 				user.setPassword(rs.getString("password"));
 				user.setUserRole(rs.getString("USER_ROLE"));
+				user.setUserSubRole(rs.getString("User_Sub_Role"));
 				user.setRegisterDate(rs.getDate("REGISTEREDDATE"));
 				user.setUserAccess(rs.getString("AUTHORIZED"));
 				users.add(user);
@@ -157,8 +154,6 @@ public class UsersDao {
 		}finally{
 			ConProvider.cleanUp(rs, statement, connection);
 		}
-		System.out.println("**********************"+users);
-
 		return users;
 	}
 	
@@ -175,6 +170,7 @@ public class UsersDao {
 				user.setUserEmail(rs.getString("EMAIL"));
 				user.setPassword(rs.getString("PASSWORD"));
 				user.setUserRole(rs.getString("USER_ROLE"));
+				user.setUserSubRole(rs.getString("User_Sub_Role"));
 				user.setRegisterDate(rs.getDate("REGISTEREDDATE"));
 				user.setUserAccess(rs.getString("AUTHORIZED"));
 				users.add(user);
@@ -238,7 +234,7 @@ public class UsersDao {
 				user.setUserEmail(rs.getString("EMAIL"));
 				user.setPassword(rs.getString("PASSWORD"));
 				user.setUserRole(rs.getString("USER_ROLE"));
-				user.setContactNumber(rs.getInt("CONTACT"));
+				user.setUserSubRole(rs.getString("User_Sub_Role"));
 				user.setUserAccess(rs.getString("AUTHORIZED"));
 				System.out.println("UserName****************"+user.getUsername());
 			}

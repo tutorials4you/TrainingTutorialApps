@@ -18,12 +18,12 @@
 	padding: 10px;
 }
 
-.inputform table tr td input,textarea,select {
+.inputform table tr td input, textarea, select {
 	width: 200px;
 	margin-top: 2%;
 }
 
-#gender1,#gender2 {
+#gender1, #gender2 {
 	width: 10px;
 }
 
@@ -45,7 +45,7 @@
 </head>
 <body>
 	<jsp:include page="header.jsp" />
-	<jsp:include page="link.html" />
+	<jsp:include page="link.jsp" />
 	<jsp:include page="rightMenu.jsp" />
 	<div class="inputform">
 		<h2 class="design">Manage User Role</h2>
@@ -69,17 +69,26 @@
 						value="<c:out value="${user.username}" />" readonly="readonly" />
 					</td>
 				</tr>
-				<tr>
+					<tr>
 					<td>User Role:</td>
 					<td><select name="userRole">
-						<option >Select User Role </option>
+							<option>Select User Role</option>
+							<option>Team Lead</option>
+							<option>Team Manger</option>
+							<option>DM</option>
+					</select></td>
+					<td>${user.userRole}</td>
+				</tr>
+				<tr>
+					<td>User Sub Role:</td>
+					<td><select name="userSubRole">
+							<option>Select User Sub Role</option>
 							<option>Entry Level</option>
 							<option>PO</option>
 							<option>AD</option>
 							<option>AS</option>
-
 					</select></td>
-					<td>${user.userRole}</td>
+					<td>${user.userSubRole}</td>
 				</tr>
 				<tr>
 					<td>User Access:</td>

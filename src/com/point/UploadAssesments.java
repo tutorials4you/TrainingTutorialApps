@@ -18,7 +18,7 @@ public class UploadAssesments extends HttpServlet {
 		response.setContentType("text/html");
 		PrintWriter out=response.getWriter();
 		request.getRequestDispatcher("header.jsp").include(request, response);
-		request.getRequestDispatcher("link.html").include(request, response);
+		request.getRequestDispatcher("link.jsp").include(request, response);
 		request.getRequestDispatcher("rightMenu.jsp").include(request, response);
 
 		HttpSession session=request.getSession(false);
@@ -26,8 +26,8 @@ public class UploadAssesments extends HttpServlet {
 			response.sendRedirect("index.html");
 		}else{
 		
-		//	AssesmentDao reteriveQuestion =new AssesmentDao();
-			//request.setAttribute("courseId", reteriveQuestion.getAllCourseID());
+			AssesmentDao reteriveQuestion =new AssesmentDao();
+			request.setAttribute("courseId", reteriveQuestion.getAllCourseID());
 			//System.out.println("COURSE ID  "+reteriveQuestion.getAllCourseID());
 			request.getRequestDispatcher("uploadAssesments.jsp").include(request, response);
 			String msg=(String)request.getAttribute("msg");

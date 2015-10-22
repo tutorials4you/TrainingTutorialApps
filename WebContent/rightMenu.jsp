@@ -83,7 +83,7 @@ function swap(targetId){
                    <li><a href="UploadUsers">UPLOAD USERS</a></li>
                   <li><a href="UserController?action=manageUserRecord">MANAGE USERS</a></li>
                   <li><a href="UserController?action=deleteUserRecord">DELETE USERS</a></li>
-                  
+                   <li><a href="UserController?action=resultStatus">RESULT STATUS</a></li>                 
                 </ul>
             </li>
         </ul>

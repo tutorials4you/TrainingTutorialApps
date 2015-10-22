@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -12,6 +13,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.course.dao.ResultRecordDao;
+import com.course.dao.ResultRecordDo;
 import com.course.dao.UsersDao;
 import com.course.model.Users;
 
@@ -20,9 +23,12 @@ public class UserController extends HttpServlet {
     //private static String INSERT_OR_EDIT = "/user.jsp";
     private static String EDIT_USERS = "/editProfile.jsp";
     private static String ManageUsersRecords = "/editManagableUsersRecord.jsp";
-    private static String LIST_USERS = "/userDetails.jsp";
+  //  private static String LIST_USERS = "/userDetails.jsp";
+    private static String LIST_USERS = "/manageUserRecord.jsp";
     private static String DELETE_USERS ="/deleteUserDetails.jsp";
     private static String MANAGE_USERS_RECORD ="/manageUserRecord.jsp";
+    private static String RESULT_DETAILS ="/resultStatus.jsp";
+
     private UsersDao dao;
     public UserController() {
         super();
@@ -63,7 +69,10 @@ public class UserController extends HttpServlet {
             forward = MANAGE_USERS_RECORD;
             request.setAttribute("users", dao.getAllUserRecord());
             System.out.println(dao.getAllUsers());
-        } else {
+        } else if (action.equalsIgnoreCase("resultStatus")){
+            forward = RESULT_DETAILS;//
+            request.setAttribute("resultStatus", ResultRecordDao.statusOfResult());
+        }else {
             forward = EDIT_USERS;
         }
 
@@ -105,6 +114,7 @@ public class UserController extends HttpServlet {
         if(action.equalsIgnoreCase("updateUsersRecords")){
     		users.setUsername(request.getParameter("name"));
     		users.setUserRole(request.getParameter("userRole"));
+    		users.setUserSubRole(request.getParameter("userSubRole"));
     		users.setUserAccess(request.getParameter("userAccess"));
                if(userId != 0)
                {
@@ -124,7 +134,6 @@ public class UserController extends HttpServlet {
     		users.setCity(request.getParameter("city"));
     		users.setState(request.getParameter("state"));
     		users.setUserRole(request.getParameter("userRole"));
-    		users.setContactNumber(Long.parseLong(request.getParameter("contact")));
     		 if(userId != 0)
              {
           	     users.setUserid(userId);

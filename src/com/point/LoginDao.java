@@ -1,5 +1,7 @@
 package com.point;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 public class LoginDao {
 
 	public static String validate(String email,String password){
@@ -20,9 +22,9 @@ public class LoginDao {
 		return userRole;
 	}
 	
-	public static String validateLogin(String email,String password){
+	public static List<String> validateLogin(String email,String password){
 	//	boolean status=false;
-		String userRole = "false" ;
+		List<String> userRole  = new ArrayList<String>() ;
 		try{
 			Connection con=ConProvider.getConnection();
 			PreparedStatement ps=con.prepareStatement("select * from training_tool_users where email=? and password=? and authorized=?");
@@ -31,10 +33,14 @@ public class LoginDao {
 			ps.setString(3,"ACTIVE");
 			ResultSet rs=ps.executeQuery();
 			if(rs.next()){
-				userRole = rs.getString("USER_ROLE");
+				//userRole = rs.getString("USER_ROLE") ;
+				userRole.add(rs.getString("USER_ROLE"));
+				userRole.add(rs.getString("USER_SUB_ROLE"));
+				userRole.add(rs.getString("NAME"));
+
 			}
 		}catch(Exception e){System.out.println(e);}
-		
+		System.out.println("USER DETAILS FROM LOGIN DAO"+userRole);
 		return userRole;
 	}
 }

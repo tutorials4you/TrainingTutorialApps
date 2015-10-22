@@ -17,10 +17,10 @@ body {
 </head>
 <body>
 	<div style="position: absolute; left: 500px; top: 70px">
-		<h3 align="center">Quiz Result</h3>
+		<h3 align="center">Assesment Result</h3>
 		<table border=1>
 			<tr>
-				<td class="head">Quiz :</td>
+				<td class="head">Assesment Id:</td>
 				<td><span id="lblSubject">${sessionScope.exam}</span>
 				</td>
 			</tr>
@@ -47,7 +47,7 @@ body {
 			<h3 align="center">Failed</h3>
 		</c:if>
 		<h2 align="center">
-			<a href='${pageContext.request.contextPath}'>Take Another Exam</a>
+			<a href='WEB-INF/jsps/home.jsp'>Take Another Exam</a>
 		</h2>
 	</div>
 </body>

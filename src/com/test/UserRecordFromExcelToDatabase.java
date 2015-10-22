@@ -20,7 +20,7 @@ public class UserRecordFromExcelToDatabase {
 		String location = "C://Users//IBM_ADMIN//Desktop//Upload//";
 		Connection con =ConProvider.getConnection();
 		PreparedStatement pstm = null;
-		String sql ="insert into TRAINING_TOOL_USERS(userid,name,email,password,User_Role,registereddate,authorized) values(USERS_ID.NEXTVAL,?,?,?,?,?,?)";
+		String sql ="insert into TRAINING_TOOL_USERS(userid,name,email,password,User_Role,registereddate,authorized,User_Sub_Role) values(USERS_ID.NEXTVAL,?,?,?,?,?,?,?)";
 		FileInputStream input = new FileInputStream(location+fileName);
 		POIFSFileSystem fs = new POIFSFileSystem (input);
 		@SuppressWarnings("resource")
@@ -42,6 +42,7 @@ public class UserRecordFromExcelToDatabase {
 				pstm.setString(4,"New User");
 				pstm.setDate(5, Formatter.getCurrentDate());
 				pstm.setString(6, "DEACTIVE");
+				pstm.setString(7, "Sub Role");
 				status= pstm.executeUpdate();
 		 
 			System.out.println("Import rows "+i);

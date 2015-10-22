@@ -11,7 +11,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-
 public class CourseDao {
     private Connection connection;
     private PreparedStatement ps = null;
@@ -114,8 +113,6 @@ public class CourseDao {
                     course.setCfileName(this.rs.getString("COURSEFILENAME"));
                     course.setCmin(this.rs.getString("MIN_DURATION"));
                     course.setFileExtension(this.rs.getString("FILE_EXTENSION"));
-                 //   course.set(this.rs.getDate("COURSEDATE"));
-
                     courses.add(course);
                 }
             }
@@ -130,7 +127,7 @@ public class CourseDao {
         return courses;
     }
 
-    public List<CourseSecond> getAllCorsesforNormalUser(String courseRoleName) {
+    public List<CourseSecond> getAllCorsesforNormalUser(String userRole,String userSubRole) {
         ArrayList<CourseSecond> courses;
         courses = new ArrayList<CourseSecond>();
         ResultSet rs = null;
@@ -138,22 +135,31 @@ public class CourseDao {
             try {
                 this.connection = ConProvider.getConnection();
                 this.statement = this.connection.createStatement();
-                if (courseRoleName.equals("Test Analyst")) {
-                    rs = this.statement.executeQuery("select * from COURSE_DETAILS_RECORD where COURSEROLEID = 'Test Analyst'");
-                } else if (courseRoleName.equals("Team Lead")) {
-                    rs = this.statement.executeQuery("select * from COURSE_DETAILS_RECORD where COURSEROLEID in ('Team Lead','Test Analyst')");
-                } else if (courseRoleName.equals("Test Manager")) {
-                    rs = this.statement.executeQuery("select * from COURSE_DETAILS_RECORD ");
-                }
+                if (userRole.equals("Team Lead")&& userSubRole.equals("PO")) {
+                    rs = this.statement.executeQuery("select * from COURSE_DETAILS_RECORD where  A_TL_PO = 1 or M_TL_PO = 1");
+                } else  if (userRole.equals("Team Lead")&& userSubRole.equals("AD")) {
+                    rs = this.statement.executeQuery("select * from COURSE_DETAILS_RECORD where  A_TL_AD = 1 or M_TL_AD = 1");
+                }else  if (userRole.equals("Team Lead")&& userSubRole.equals("AS")) {
+                    rs = this.statement.executeQuery("select * from COURSE_DETAILS_RECORD where  A_TL_AS = 1 or M_TL_AS = 1");
+                }else  if (userRole.equals("Team Lead")&& userSubRole.equals("Entry Level")) {
+                    rs = this.statement.executeQuery("select * from COURSE_DETAILS_RECORD where  A_TL_EL = 1 or M_TL_EL = 1");
+                } else   if (userRole.equals("Team Manger")&& userSubRole.equals("PO")) {
+                           rs = this.statement.executeQuery("select * from COURSE_DETAILS_RECORD where  A_TM_PO = 1 or M_TM_PO = 1");
+                       } else  if (userRole.equals("Team Manger")&& userSubRole.equals("AD")) {
+                           rs = this.statement.executeQuery("select * from COURSE_DETAILS_RECORD where  A_TM_AD = 1 or M_TM_AD = 1");
+                       }else  if (userRole.equals("Team Manger")&& userSubRole.equals("AS")) {
+                           rs = this.statement.executeQuery("select * from COURSE_DETAILS_RECORD where  A_TM_AS = 1 or M_TM_AS = 1");
+                       }else  if (userRole.equals("Team Manger")&& userSubRole.equals("Entry Level")) {
+                           rs = this.statement.executeQuery("select * from COURSE_DETAILS_RECORD where  A_TM_EL = 1 or M_TM_EL = 1");
+                       }
                 while (rs.next()) {
                     CourseSecond course = new CourseSecond();
                     course.setCid(rs.getString("CID"));
                     course.setCname(rs.getString("CNAME"));
-                    course.setCmin(rs.getString("CMINDURATION"));
-                    course.setCmax(rs.getInt("CMAXDURATION"));
                     course.setCauthor(rs.getString("CAUTHOR"));
                     course.setCfileName(rs.getString("COURSEFILENAME"));
-                    course.setCourseRoleId(rs.getString("COURSEROLEID"));
+                    course.setCmin(rs.getString("MIN_DURATION"));
+                    course.setFileExtension(rs.getString("FILE_EXTENSION"));
                     courses.add(course);
                 }
             }
@@ -165,6 +171,7 @@ public class CourseDao {
         finally {
             ConProvider.cleanUp((ResultSet)rs, (Statement)this.statement, (Connection)this.connection);
         }
+        System.out.println("Courses "+courses);
         return courses;
     }
 

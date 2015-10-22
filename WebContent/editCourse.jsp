@@ -53,7 +53,7 @@
 </style>
 <body>
 	<jsp:include page="header.jsp" />
-	<jsp:include page="link.html" />
+	<jsp:include page="link.jsp" />
 	<jsp:include page="rightMenu.jsp" />
 	<div class="inputform" style="float: left;">
 		<h2 class="design">EDIT COURSE DETAILS</h2>

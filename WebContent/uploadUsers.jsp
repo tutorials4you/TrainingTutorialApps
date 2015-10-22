@@ -7,7 +7,7 @@
 <html>
 <meta charset="ISO-8859-1">
 <title>Upload Assesment</title>
-<link href="cssfile/assesments.css" rel="stylesheet" type="text/css"/>
+<link href="cssfile/uploadUser.css" rel="stylesheet" type="text/css"/>
 <head>
 <script type="text/javascript" src="javascript/utill.js"></script>
 </head>

@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.course.dao.ResultRecordDao;
+import com.course.dao.ResultRecordDo;
 import com.quiz.Exam;
 import com.quiz.QuizQuestion;
 
@@ -26,7 +28,7 @@ public class ExamController extends HttpServlet {
 		// TODO Auto-generated method stub
 
 		boolean finish=false;
-
+		String started = null;
 		HttpSession session=request.getSession();		
 		try
 		{
@@ -38,7 +40,7 @@ public class ExamController extends HttpServlet {
 			session.setAttribute("currentExam",newExam);
 			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss a");
 			Date date = new Date();
-			String started=dateFormat.format(date);
+			 started=dateFormat.format(date);
 			session.setAttribute("started",started);
 			}
 
@@ -108,14 +110,46 @@ public class ExamController extends HttpServlet {
 
 		}
 		else if("Finish Exam".equals(action)||( minute==0 && second==0))
-		{   finish=true;
-		int result=exam.calculateResult(exam);				
+		{  
+			finish=true;
+		int result=exam.calculateResult(exam);	
+		System.out.println("User Role "+session.getAttribute("userRole"));
+		System.out.println("User Id "+session.getAttribute("email"));
+		System.out.println("User Name"+session.getAttribute("name"));
+		System.out.println("Course Id"+session.getAttribute("cid"));
+		System.out.println("Marks  "+result);
 		request.setAttribute("result",result);
-		request.getSession().setAttribute("currentExam",null);
-		request.getRequestDispatcher("/WEB-INF/jsps/result.jsp").forward(request,response);
-
+		
+		int attemptStatus = ResultRecordDao.checkNoOfAttemts(session.getAttribute("email").toString(), session.getAttribute("cid").toString());
+		if(attemptStatus == 0){
+			ResultRecordDo resultRecordDo = new ResultRecordDo();
+			resultRecordDo.setUserRole(session.getAttribute("userRole").toString());
+			if(result>5)
+			resultRecordDo.setStatus("Pass");
+			else resultRecordDo.setStatus("Fail");
+			resultRecordDo.setUserId(session.getAttribute("email").toString());
+			resultRecordDo.setUserName(session.getAttribute("name").toString());
+			resultRecordDo.setMarks(result);
+			resultRecordDo.setNoOfAttempts(1);
+			resultRecordDo.setCourseId(session.getAttribute("cid").toString());
+			ResultRecordDao.insertResultRecord(resultRecordDo);
+		}else {
+			ResultRecordDo resultRecordDo = new ResultRecordDo();
+			resultRecordDo.setUserRole(session.getAttribute("userRole").toString());
+			if(result>5)
+			resultRecordDo.setStatus("Pass");
+			else resultRecordDo.setStatus("Fail");
+			resultRecordDo.setUserId(session.getAttribute("email").toString());
+			resultRecordDo.setUserName(session.getAttribute("name").toString());
+			resultRecordDo.setMarks(result);
+			resultRecordDo.setNoOfAttempts(attemptStatus+1);
+			resultRecordDo.setCourseId(session.getAttribute("cid").toString());
+			ResultRecordDao.updateResultRecords(resultRecordDo);
 		}
 
+		request.getSession().setAttribute("currentExam",null);
+		request.getRequestDispatcher("/WEB-INF/jsps/result.jsp").forward(request,response);
+		}
 		if(finish!=true){
 			request.getRequestDispatcher("/WEB-INF/jsps/exam.jsp").forward(request,response);
 		}

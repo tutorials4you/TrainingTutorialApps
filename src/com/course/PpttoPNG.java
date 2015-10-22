@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import javax.imageio.ImageIO;
+
 import org.apache.poi.xslf.usermodel.XMLSlideShow;
 import org.apache.poi.xslf.usermodel.XSLFSlide;
 
@@ -29,6 +30,7 @@ public class PpttoPNG {
 	static PreparedStatement ps = null;
 	public static void insertPicture(String fileName)throws IOException{
 		File file=new File("C:\\Users\\IBM_ADMIN\\Desktop\\Upload\\"+fileName);
+		@SuppressWarnings("resource")
 		XMLSlideShow ppt = new XMLSlideShow(new FileInputStream(file));
 		double zoom = 2; // magnify it by 2
 		AffineTransform at = new AffineTransform();

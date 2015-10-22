@@ -9,16 +9,18 @@
 </head>
 <body>
 <jsp:include page="header.jsp" />
-<jsp:include page="link.html" />
+	<jsp:include page="link.jsp" />
 <jsp:include page="rightMenu.jsp" />
     <table border=1>
         <thead>
-            <tr bgcolor ="#0099CC">
+            <tr bgcolor ="yellow">
                 <th >USER ID</th>
                 <th>NAME</th>
-                <th>Att Id</th>
-                <th>PASSWORD</th>
-                <th>User Role</th>
+                <th>EMAIL</th>
+                	 <th>USER ROLE</th>
+                  <th>USER SUB ROLE</th>
+                 <th>REGISTER DATE</th>
+                <th>USER ACCESS</th> 
                 <th colspan=2>Action</th>
             </tr>
         </thead>
@@ -28,9 +30,11 @@
                     <td><c:out value="${user.userid}" /></td>
                     <td><c:out value="${user.username}" /></td>
                     <td><c:out value="${user.userEmail}" /></td>
-                    <td><c:out value="${user.password}" /></td>
                     <td><c:out value="${user.userRole}" /></td>
-                     <td><a href="UserController?action=deleteUser&userId=<c:out value="${user.userid}"/>">Delete</a></td>
+                    <td><c:out value="${user.userSubRole}" /></td>
+                    <td><c:out value="${user.registerDate}" /></td>
+                   <td><c:out value="${user.userAccess}" /></td>
+				  <td><a href="UserController?action=deleteUser&userId=<c:out value="${user.userid}"/>">Delete</a></td>
                 </tr>
             </c:forEach>
         </tbody>

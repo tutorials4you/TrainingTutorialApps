@@ -14,7 +14,7 @@ th {
 </head>
 <body>
 	<jsp:include page="header.jsp" />
-	<jsp:include page="link.html" />
+	<jsp:include page="link.jsp" />
 	<jsp:include page="rightMenuNormalUsers.jsp" />
 	<table border=1>
 		<thead>

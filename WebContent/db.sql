@@ -87,7 +87,7 @@ CREATE SEQUENCE COURSE_ID
   INCREMENT BY 1
   CACHE 20;
   
-  CREATE TABLE TRAINING_TOOL_USERS
+ CREATE TABLE TRAINING_TOOL_USERS
   (
     userid         NUMBER(11) NOT NULL ,
     name           VARCHAR(45) DEFAULT NULL,
@@ -96,6 +96,7 @@ CREATE SEQUENCE COURSE_ID
     User_Role      VARCHAR2(20),
     registereddate DATE,
     authorized     VARCHAR2(50),
+    User_Sub_Role      VARCHAR2(20),
     PRIMARY KEY (userid)
   );
 CREATE SEQUENCE USERS_ID
@@ -126,6 +127,24 @@ CREATE TABLE Assesments
   
   
    CREATE SEQUENCE Ass_Id
+  MINVALUE 1
+  MAXVALUE 999999999999999999999999999
+  START WITH 1
+  INCREMENT BY 1
+  CACHE 20;
+  
+  create Table ResultRecord(
+    rid number(10),
+    userId varchar2(20),
+    userName varchar2(100),
+    userRole varchar2(200),
+    status varchar2(200),
+    marks number(10),
+    cid number(10),
+    noOfAttempt number(10),
+    resdate date );
+    
+      CREATE SEQUENCE Res_Id
   MINVALUE 1
   MAXVALUE 999999999999999999999999999
   START WITH 1

@@ -5,9 +5,15 @@ import java.util.Date;
 public class Users {
 	int userid;
 	long contactNumber;
-	String username,userEmail,password,gender,addressLine,city,state,userRole,userAccess,userAction;
+	String username,userEmail,password,gender,addressLine,city,state,userRole,userAccess,userAction,userSubRole;
 	Date registerDate;
 	String dob;
+	public String getUserSubRole() {
+		return userSubRole;
+	}
+	public void setUserSubRole(String userSubRole) {
+		this.userSubRole = userSubRole;
+	}
 	public String getUserAction() {
 		return userAction;
 	}

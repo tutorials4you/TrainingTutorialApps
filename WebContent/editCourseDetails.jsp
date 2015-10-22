@@ -11,7 +11,7 @@
 </head>
 <body>
 	<jsp:include page="header.jsp" />
-	<jsp:include page="link.html" />
+	<jsp:include page="link.jsp" />
 	<jsp:include page="rightMenu.jsp" />
 	<div class="inputform">
 		<h2 class="design">Edit Course</h2>

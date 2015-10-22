@@ -19,7 +19,7 @@ public class UploadUsers extends HttpServlet {
 		response.setContentType("text/html");
 		PrintWriter out=response.getWriter();
 		request.getRequestDispatcher("header.jsp").include(request, response);
-		request.getRequestDispatcher("link.html").include(request, response);
+		request.getRequestDispatcher("link.jsp").include(request, response);
 		request.getRequestDispatcher("rightMenu.jsp").include(request, response);
 
 		HttpSession session=request.getSession(false);

@@ -11,22 +11,22 @@
 }
 
 #AddButton {
-	left: 101px;
+	left: 117px;
 	position: absolute;
-	height: 66px;
+	height: 74px;
 	text-align: center;
-	bottom: 348px!important;
-	width: 79px;
+	bottom: 297px!important;
+	width: 63px;
 	border:0px;
 	background:url("images/nextButton.jpg");
 }
 
 #MinButton {
-	left: 1221px;
+	left: 1223px;
 	position: absolute;
 	text-align: center;
-	bottom: 344px!important;
-    width: 78px;
+	bottom: 301px!important;
+    width: 63px;
     height:74px;
 	background:url("images/previous.jpg");
 	border:0px;
@@ -40,7 +40,11 @@
 	border: solid 3px blue;
 	
 }
-
+#startAssesment{
+position:relative;
+left:600px;
+visibility: hidden;
+}
 
 #abc {
 	position: relative;
@@ -50,11 +54,21 @@
 	margin-top: -50px;
 }
 #bodyDesign{
-	background:url("images/body.jpg");
-
+/* 	background:url("images/body.jpg");
+ */
 }
 </style>
 <script type="text/javascript">
+
+function isProcess()
+{
+  var answer = confirm ("Are you  want to Assesment ?");
+  if (answer){
+              document.myForm.answer.value = "true";  
+              document.myForm.submit();
+              return true;
+    }else return false
+}
 
 	function loadXMLDoc() {
 		
@@ -97,12 +111,21 @@
 				if (counter > 1) {
 					document.getElementById("MinButton").disabled = false;
 					document.getElementById('abc').style.visibility = 'hidden';
-					
+					document.getElementById('startAssesment').style.visibility = 'hidden';
+
 				}
 				if(counter-1 == <%=session.getAttribute("maxPictureCount")%>)
 			{
-				document.getElementById("AddButton").disabled = true;
+				document.getElementById("AddButton").disabled = false;
+				document.getElementById('startAssesment').style.visibility = 'visible';
+
+				alert("Course Over Click on Assesment Buton to Statrt Assesment");
 			}
+				if(counter -2== <%=session.getAttribute("maxPictureCount")%>)
+				{
+					document.getElementById("AddButton").disabled = true;
+					document.getElementById('startAssesment').style.visibility = 'hidden';
+					}
 				$('#TextBox').val(counter);
 				});
 		});
@@ -113,6 +136,8 @@
 		if (counter < 1) {
 		document.getElementById("MinButton").disabled = true;
 		document.getElementById('abc').style.visibility = 'visible';
+		//   isProcess();
+		
 		}
 		if (counter - 1 <= <%=session.getAttribute("maxPictureCount")%>) {
 	   document.getElementById("AddButton").disabled = false;
@@ -121,12 +146,12 @@
 		});
 		});
 	</script>
-	<table id="abc" border=1; align:center>
+ 		<a id="startAssesment" href="takeExam?test=<%=session.getAttribute("cid").toString()%>">Assesment</a>
+		<table id="abc" border=1; align:center>
 	     <tr>
 			<td>Course</td>
 			<td>AVPN</td>
 		</tr>
-
 		<tr>
 			<td>Course Author</td>
 			<td>Srinivas</td>
@@ -136,15 +161,11 @@
 			<td>Min Duration </td>
 			<td>20 Min</td>
 		</tr>
-
 		<tr>
 			<td>Course Level</td>
 			<td>Entry Level</td>
 		</tr>
-
-
 	</table>
-
 	<span id="err"> </span>
 	<span id="TextBox"></span>
 	<input type="Button" id='MinButton'  onclick="loadXMLDoc()" />

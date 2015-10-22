@@ -4,7 +4,12 @@
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>Untitled Document</title>
+<style type="text/css">
+body {
+	background: url("${pageContext.request.contextPath}/images/background.jpg");
+}
+</style>
+<title>Video </title>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <style type="text/css">
 <!--
@@ -25,7 +30,7 @@
     </div></td>
   </tr>
   <tr>
-    <td width="710" bgcolor="#CCCC33" align="center" style="position:relative;top:72px"><span class="style4">Video Player Version 1.0</span>      <strong>
+    <td width="710" bgcolor="#CCCC33" align="center" ><span class="style4">Video Player Version 1.0</span>      <strong>
      
       <embed  src=" <%= "http://localhost:2222/video/"+session.getAttribute("videoFile")%>" type="application/x-mplayer2" pluginspage="http://www.microsoft.com/Windows/MediaPlayer/" name="mediaplayer1" ShowStatusBar="true" EnableContextMenu="false" width="700" height="500" autostart="true" loop="false" align="middle" volume="60" ></embed>
     </strong></td>

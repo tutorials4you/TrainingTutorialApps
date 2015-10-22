@@ -14,7 +14,7 @@ th {
 </head>
 <body>
 <jsp:include page="header.jsp" />
-<jsp:include page="link.html" />
+	<jsp:include page="link.jsp" />
 <jsp:include page="rightMenu.jsp" />
     <table border=1>
         <thead>
@@ -22,8 +22,9 @@ th {
                 <th >USER ID</th>
                 <th>NAME</th>
                 <th>EMAIL</th>
-                 <th>USER ROLE</th>
-                <th>REGISTER DATE</th>
+                	 <th>USER ROLE</th>
+                  <th>USER SUB ROLE</th>
+                 <th>REGISTER DATE</th>
                 <th>USER ACCESS</th> 
                 <th colspan=2>Action</th>
             </tr>
@@ -35,7 +36,8 @@ th {
                     <td><c:out value="${user.username}" /></td>
                     <td><c:out value="${user.userEmail}" /></td>
                     <td><c:out value="${user.userRole}" /></td>
-                   <td><c:out value="${user.registerDate}" /></td>
+                    <td><c:out value="${user.userSubRole}" /></td>
+                    <td><c:out value="${user.registerDate}" /></td>
                    <td><c:out value="${user.userAccess}" /></td>
 				  <td><a href="UserController?action=manageUsersRecords&userId=<c:out value="${user.userid}"/>">Update</a></td>
                 </tr>

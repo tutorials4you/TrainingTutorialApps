@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 import javax.servlet.RequestDispatcher;
@@ -39,6 +40,8 @@ public class CourseController extends HttpServlet {
         String forward="";
         HttpSession session = request.getSession(true);
         String userRole = session.getAttribute("userRole").toString();
+        String userSubRole = session.getAttribute("userSubRole").toString();
+
         String action = request.getParameter("action");
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
@@ -55,6 +58,11 @@ public class CourseController extends HttpServlet {
             request.setAttribute("course", course);
         } else if (action.equalsIgnoreCase("listOfCourse")&&(userRole.equals("admin"))){
             forward = LIST_COURSES;
+            ArrayList<CourseSecond> courses = new ArrayList<CourseSecond>();
+            courses = (ArrayList<CourseSecond>) dao.getAllCourses();
+            int noOfCourse = courses.size();
+            session.setAttribute("noOfCourse", noOfCourse);
+            System.out.println("*************"+noOfCourse);
             request.setAttribute("courses", dao.getAllCourses());
             System.out.println(dao.getAllCourses());
         }else if (action.equalsIgnoreCase("launchCourse")&&(userRole.equals("admin"))){
@@ -63,7 +71,7 @@ public class CourseController extends HttpServlet {
             System.out.println(dao.getAllCourses());
         }else if (action.equalsIgnoreCase("launchCourse")&&(userRole.equals("Test Manager")||userRole.equals("Test Analyst")||userRole.equals("Team Lead"))){
             forward = LAUNCH_COURSE_NORMAL_USER;
-            request.setAttribute("courses", dao.getAllCorsesforNormalUser(userRole));
+            request.setAttribute("courses", dao.getAllCorsesforNormalUser(userRole,userSubRole));
         }else if (action.equalsIgnoreCase("launch")){
             String cid = request.getParameter("cid");
             String email = (String) session.getAttribute("email");
