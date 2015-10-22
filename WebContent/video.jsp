@@ -17,7 +17,11 @@ body {
  color: #003333;
  font-weight: bold;
 }
--->
+#startAssesment{
+	left: 650px;
+    position: relative;
+    top: 10px;
+}
 </style>
 </head>
 <body>
@@ -40,5 +44,7 @@ body {
     <td bgcolor="#CCCC33"></td>
   </tr>
 </table>
+     		<a id="startAssesment" href="takeExam?test=<%=session.getAttribute("cid").toString()%>">Assesment</a>
+
 </body>
 </html>

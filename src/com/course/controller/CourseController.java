@@ -90,9 +90,13 @@ public class CourseController extends HttpServlet {
             session.setAttribute("cid",cid);  
         }else if (action.equalsIgnoreCase("launchVideo")){
             String fileName = request.getParameter("fileName");
-            System.out.println("**********"+action);
+            String cid = request.getParameter("cid");
+
+            System.out.println("**********"+action+cid+fileName);
             forward = Play_Video;
+            session.setAttribute("cid",cid);  
             session.setAttribute("videoFile",fileName);  
+
         }else if (action.equalsIgnoreCase("launchNomal")&&userRole.equals("Manager")||userRole.equals("Test Analyst")||userRole.equals("Team Lead")){
             String cid = request.getParameter("cid");
             System.out.println("**********"+action);

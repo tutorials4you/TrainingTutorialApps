@@ -41,8 +41,8 @@ body {
 </div>
 
 <div style="position:absolute;left:500px;top:75px">
-Don`t have an account, click here to <a href='${pageContext.request.contextPath}/register'>Register</a>
-<br/>
+<%-- Don`t have an account, click here to <a href='${pageContext.request.contextPath}/register'>Register</a>
+ --%><br/>
 <h3 align="center">${errorMessage}</h3>
 </div>
 <div id="wrapper">

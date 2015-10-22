@@ -105,7 +105,7 @@ int count = 0;
      <td><a href="CourseController?action=launch&cid=<c:out value="${course.cid}"/>"><img height="120" width="120" src="${pageContext.request.contextPath}/images/Assesment_PPt.png"/></a><h4><c:out value="${course.cname}" /></h4></td>
      </c:when>
 	<c:otherwise>
-	 <td><a href="CourseController?action=launchVideo&fileName=<c:out value="${course.cfileName}"/>"><img height="120" width="120" src="${pageContext.request.contextPath}/images/Asses_Video.png" /></a><h4><c:out value="${course.cname}" /></h4></td>
+	 <td><a href="CourseController?action=launchVideo&fileName=<c:out value="${course.cfileName} &cid=${course.cid}"/>"><img height="120" width="120" src="${pageContext.request.contextPath}/images/Asses_Video.png" /></a><h4><c:out value="${course.cname}" /></h4></td>
 	</c:otherwise>
 	</c:choose>
 <%if(count == 5){
