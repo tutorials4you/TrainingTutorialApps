@@ -1,15 +1,38 @@
 package com.course.dao;
 
+import java.util.Date;
+
 public class ResultRecordDo {
 	
 	private int noOfAttempts;
 	private String userName;
 	private String userRole;
+	private String subUserRole;
 	private String userId;
 	private String courseId;
 	private int marks;
 	private String status;
+	private String cname;
+	private Date sDate;
 	
+	public String getSubUserRole() {
+		return subUserRole;
+	}
+	public void setSubUserRole(String subUserRole) {
+		this.subUserRole = subUserRole;
+	}
+	public Date getsDate() {
+		return sDate;
+	}
+	public void setsDate(Date sDate) {
+		this.sDate = sDate;
+	}
+	public String getCname() {
+		return cname;
+	}
+	public void setCname(String cname) {
+		this.cname = cname;
+	}
 	public String getStatus() {
 		return status;
 	}

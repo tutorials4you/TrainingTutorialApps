@@ -3,6 +3,7 @@ package com.quiz.controller;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -120,8 +121,8 @@ public class ExamController extends HttpServlet {
 		System.out.println("Marks  "+result);
 		request.setAttribute("result",result);
 		
-		int attemptStatus = ResultRecordDao.checkNoOfAttemts(session.getAttribute("email").toString(), session.getAttribute("cid").toString());
-		if(attemptStatus == 0){
+		List<Integer> attemptStatus = ResultRecordDao.checkNoOfAttemts(session.getAttribute("email").toString(), session.getAttribute("cid").toString());
+		if(attemptStatus.size()==0){
 			ResultRecordDo resultRecordDo = new ResultRecordDo();
 			resultRecordDo.setUserRole(session.getAttribute("userRole").toString());
 			if(result>5)
@@ -132,19 +133,36 @@ public class ExamController extends HttpServlet {
 			resultRecordDo.setMarks(result);
 			resultRecordDo.setNoOfAttempts(1);
 			resultRecordDo.setCourseId(session.getAttribute("cid").toString());
+			resultRecordDo.setCname(session.getAttribute("cname").toString());
+			resultRecordDo.setSubUserRole(session.getAttribute("userSubRole").toString());
 			ResultRecordDao.insertResultRecord(resultRecordDo);
 		}else {
 			ResultRecordDo resultRecordDo = new ResultRecordDo();
 			resultRecordDo.setUserRole(session.getAttribute("userRole").toString());
-			if(result>5)
-			resultRecordDo.setStatus("Pass");
-			else resultRecordDo.setStatus("Fail");
-			resultRecordDo.setUserId(session.getAttribute("email").toString());
-			resultRecordDo.setUserName(session.getAttribute("name").toString());
-			resultRecordDo.setMarks(result);
-			resultRecordDo.setNoOfAttempts(attemptStatus+1);
-			resultRecordDo.setCourseId(session.getAttribute("cid").toString());
-			ResultRecordDao.updateResultRecords(resultRecordDo);
+			if(attemptStatus.get(1)>result){
+				if(result>5)
+					resultRecordDo.setStatus("Pass");
+					else resultRecordDo.setStatus("Fail");
+					resultRecordDo.setUserId(session.getAttribute("email").toString());
+					resultRecordDo.setUserName(session.getAttribute("name").toString());
+					resultRecordDo.setMarks(attemptStatus.get(1));
+					resultRecordDo.setNoOfAttempts(attemptStatus.get(0)+1);
+					resultRecordDo.setCourseId(session.getAttribute("cid").toString());
+					resultRecordDo.setCname(session.getAttribute("cname").toString());
+					ResultRecordDao.updateResultRecords(resultRecordDo);
+					
+			}else{
+				if(result>5)
+					resultRecordDo.setStatus("Pass");
+					else resultRecordDo.setStatus("Fail");
+					resultRecordDo.setUserId(session.getAttribute("email").toString());
+					resultRecordDo.setUserName(session.getAttribute("name").toString());
+					resultRecordDo.setMarks(result);
+					resultRecordDo.setNoOfAttempts(attemptStatus.get(0)+1);
+					resultRecordDo.setCourseId(session.getAttribute("cid").toString());
+					resultRecordDo.setCname(session.getAttribute("cname").toString());
+					ResultRecordDao.updateResultRecords(resultRecordDo);
+			}
 		}
 
 		request.getSession().setAttribute("currentExam",null);

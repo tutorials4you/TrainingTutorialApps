@@ -79,33 +79,7 @@ public class UserController extends HttpServlet {
         RequestDispatcher view = request.getRequestDispatcher(forward);
         view.forward(request, response);
     }
-  /*  protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Users users = new Users();
-        
-		users.setUsername(request.getParameter("name"));
-		users.setPassword(request.getParameter("password"));
-		users.setUserEmail(request.getParameter("email"));
-		users.setGender(request.getParameter("gender"));
-		users.setAddressLine(request.getParameter("addressLine"));
-		users.setCity(request.getParameter("city"));
-		users.setState(request.getParameter("state"));
-		users.setUserRole(request.getParameter("userRole"));
-		users.setContactNumber(Long.parseLong(request.getParameter("contact")));
-        
-        int userId = Integer.parseInt(request.getParameter("userId"));
-        System.out.println("USER ID FROM POST"+userId);
-        if(userId != 0)
-        {
 
-        	System.out.println("IF BLOCK OF POST");
-            users.setUserid(userId);
-            dao.checkUser(users);
-        }
-        
-    	RequestDispatcher view = request.getRequestDispatcher(LIST_USERS);
-        request.setAttribute("users", dao.getAllUsers());
-        view.forward(request, response);
-    }*/
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Users users = new Users();
         String action = request.getParameter("action");

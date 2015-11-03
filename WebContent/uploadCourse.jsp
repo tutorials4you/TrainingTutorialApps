@@ -8,7 +8,18 @@
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
 <link href="cssfile/global.css" rel="stylesheet" type="text/css"/>
+
 <head>
+<style type="text/css">
+#prereq{
+	bottom: 147px;
+    left: 153px;
+    position: relative;
+	}
+#avTester{
+border:1;
+}
+</style>
 <script type="text/javascript" src="javascript/utill.js"></script>
 </head>
 <body>
@@ -35,16 +46,25 @@
 					<td>File:</td>
 					<td id =courseFIlebox><input id="password" type="file" name="file" /></td>
 				</tr>
-				
+				<tr id= prereq>
+					<td>Pre-requisite:</td>
+					<td id =prereqs>		<select  id="courseId" name ="courseId">
+											<option >Select Course Id</option>
+<%-- 				<c:forEach var="x" items="${requestScope.courseId}">
+ --%>							<option >SJAJSJ</option>
+<%-- 				</c:forEach>
+ --%>		</select></td>
+				</tr>
 				<!-- --***********************************Avilable ************************************** -->
 				<div id ="available">Available For</div>
 				
 				<tr id="userRole">
 					<td id="firsttd">
-						<div>
+						<div id ="avTester">
 							<input type="checkbox" id="entryLevelCb" value="Entry Level"
 								onclick="showHide();"><label
-								for="teamLead">TEST LEAD</label>
+								for="teamLead">TESTER</label>
+					<div id ="avifortester">
 						<div id='entryLevel' style="visibility: hidden;">
 							<input type="checkbox" id="entryLevelCb" name="atlel"
 								value="1"><label for="teamLead">ENTRY
@@ -63,15 +83,14 @@
 								value="1"><label for="teamLead">AS</label>
 						</div>
 						</div>
-						
-						
-						
-					</td>
+					</div>	
+				</td>
 					<td id="secondtd1">
 						<div>
 							<input type="checkbox" id="testManger" name="testMangerq"
 								value="Entry Level" onclick="showManger();"><label
 								for="teamLead">TEST MANAGER</label>
+								<div id ="mandRole">
 						<div id='tmentryLevel' style="visibility: hidden;">
 							<input type="checkbox" id="entryLevelCb" name="atmel"
 								value="1"><label for="teamLead">ENTRY
@@ -90,6 +109,7 @@
 								value="1"><label for="teamLead">AS</label>
 						</div>
 						</div>
+						</div>
 					</td>
 		<!-- --***********************************Mandantory ************************************** -->
 					<div id ="mandantory">Mandantory For</div>
@@ -97,7 +117,8 @@
 						<div>
 							<input type="checkbox" id="mentryLevelCb" value="Entry Level"
 								onclick="mshowHide();"><label
-								for="teamLead">TEST LEAD</label>
+								for="teamLead">TESTER</label>
+						<div id ="manTester">
 						<div id='mentryLevel' style="visibility: hidden;">
 							<input type="checkbox" id="mentryLevelCb" name="mEntrylevel"
 								value="1"><label for="teamLead">ENTRY
@@ -116,15 +137,15 @@
 								value="1"><label for="teamLead">AS</label>
 						</div>
 						</div>
-						
-						
-						
+						</div>
 					</td>
 					<td id="secondtd1">
 						<div>
 							<input type="checkbox" id="mtestManger" name="testMangerq"
 								value="Entry Level" onclick="mshowManger();"><label
 								for="teamLead">TEST MANAGER</label>
+					
+					<div id ="manTm">
 						<div id='mtmentryLevel' style="visibility: hidden;">
 							<input type="checkbox" id="entryLevelCb" name="mtmel"
 								value="1"><label for="teamLead">ENTRY
@@ -142,6 +163,9 @@
 							<input type="checkbox" name="mtmas" id="entryLevelCb"
 								value="1"><label for="teamLead">AS</label>
 						</div>
+					
+					</div>
+					
 						</div>
 					</td>
 					<td id="secondtd1"

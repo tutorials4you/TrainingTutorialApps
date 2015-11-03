@@ -23,11 +23,11 @@ import com.point.Formatter;
 public class PpttoPNG {
 	static BufferedImage img;
 	static FileOutputStream out;
-	//static String jpege = "C:\\Users\\IBM_ADMIN\\Desktop\\28July\\";
 	static String jpege = "C:\\Users\\IBM_ADMIN\\Desktop\\Upload\\";
 
 	static Connection con = null;
 	static PreparedStatement ps = null;
+	
 	public static void insertPicture(String fileName)throws IOException{
 		File file=new File("C:\\Users\\IBM_ADMIN\\Desktop\\Upload\\"+fileName);
 		@SuppressWarnings("resource")
@@ -77,11 +77,23 @@ public class PpttoPNG {
 		out.close();	
 	}
 	
-	/*public static void main(String args[]) throws IOException
-	{
-		
-		PpttoPNG.insertPicture("JAVA_PPt.pptx");
-	}*/
+	public static int insertProfilePic(String fileName,String userEmail){
+		String imagePath  = jpege+fileName;
+		int j = 0;
+		try{
+			con=ConProvider.getConnection();
+			System.out.println(">>>>>>>>>>"+fileName);
+			ps=con.prepareStatement("insert into TRAINING_TOOL_USERS (profile_pic) values(?) where email="+userEmail);
+			FileInputStream fin=new FileInputStream(imagePath);
+			System.out.println(imagePath);
+			ps.setBinaryStream(1,fin,fin.available());
+			 j=ps.executeUpdate();
+			System.out.println(j+" records affected");
+			con.close();
+		}catch (Exception e) {e.printStackTrace();}
+		System.out.println("Profile picture inserted");
+		return j ;
+	}
 }
 
 

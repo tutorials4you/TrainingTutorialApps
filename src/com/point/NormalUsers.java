@@ -11,7 +11,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.assesment.dom.AvilCourseDo;
+import com.assesment.dom.ManCourseDo;
 import com.course.dao.CourseDao;
+import com.course.dao.ResultRecordDao;
 import com.course.model.CourseSecond;
 
 import java.sql.*;
@@ -64,13 +67,20 @@ public class NormalUsers extends HttpServlet {
 		HttpSession session = request.getSession(true);
 		String userRole = session.getAttribute("userRole").toString();
 		String userSubRole = session.getAttribute("userSubRole").toString();
-		CourseDao dao = new CourseDao();
-		List<CourseSecond> course = new ArrayList<CourseSecond>();
-		course = dao.getAllCorsesforNormalUser(userRole, userSubRole);
-		System.out.println("********"+course.size());
-		session.setAttribute("countOfCOurse", course.size());
-		
-		request.setAttribute("courses", dao.getAllCorsesforNormalUser(userRole,userSubRole));		
+	//	CourseDao dao = new CourseDao();
+		List<ManCourseDo> courseMan = new ArrayList<ManCourseDo>();
+		List<AvilCourseDo> courseAvi = new ArrayList<AvilCourseDo>();
+		courseMan=ResultRecordDao.manCourse(userRole, userSubRole);
+		courseAvi=ResultRecordDao.aviCourse(userRole, userSubRole);
+		//course = dao.getAllCorsesforNormalUser(userRole, userSubRole);
+		//System.out.println("********"+course.size());
+		session.setAttribute("courseMan", courseMan.size());
+		session.setAttribute("courseAvi", courseAvi.size());
+
+		request.setAttribute("manCourse", ResultRecordDao.manCourse(userRole, userSubRole));
+		request.setAttribute("aviCourse", ResultRecordDao.aviCourse(userRole, userSubRole));
+
+	//	request.setAttribute("courses", dao.getAllCorsesforNormalUser(userRole,userSubRole));		
 		request.getRequestDispatcher("/WEB-INF/jsps/home.jsp").include(request, response);;
 
 	}

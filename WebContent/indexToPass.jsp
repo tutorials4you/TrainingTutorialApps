@@ -11,25 +11,27 @@
 }
 
 #AddButton {
-	left: 117px;
-	position: absolute;
-	height: 74px;
-	text-align: center;
-	bottom: 297px!important;
-	width: 63px;
-	border:0px;
-	background:url("images/nextButton.jpg");
-}
-
-#MinButton {
 	left: 1223px;
 	position: absolute;
 	text-align: center;
 	bottom: 301px!important;
     width: 63px;
     height:74px;
-	background:url("images/previous.jpg");
+   	border:0px;
+   		background:url("images/previous.jpg");
+   	
+}
+
+#MinButton {
+left: 117px;
+	position: absolute;
+	height: 74px;
+	text-align: center;
+	bottom: 297px!important;
+	width: 63px;
 	border:0px;
+	   	background:url("images/nextButton.jpg");
+	
 }
 
 #statusValue {

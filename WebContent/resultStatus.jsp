@@ -25,6 +25,7 @@ th {
                  <th>MARKS</th>
                  <th>NO OF ATTEMPTS</th>
                  <th>COURSE ID</th>
+                  <th>DATE</th>
             </tr>
         </thead>
         <tbody>
@@ -36,6 +37,7 @@ th {
                     <td><c:out value="${resultStatus.marks}" /></td>
                     <td><c:out value="${resultStatus.noOfAttempts}" /></td>
                     <td><c:out value="${resultStatus.courseId}" /></td>
+                     <td><c:out value="${resultStatus.sDate}" /></td>
                  </tr>
             </c:forEach>
         </tbody>

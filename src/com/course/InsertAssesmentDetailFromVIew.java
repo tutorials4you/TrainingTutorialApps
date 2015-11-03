@@ -35,7 +35,8 @@ public class InsertAssesmentDetailFromVIew extends HttpServlet {
 		response.getWriter();
 		String assesmentName = request.getParameter("assesmentName");
 		String timeLimit = request.getParameter("timeLimit");
-		String courseId = request.getParameter("courseId");
+		String courseIdwithName = request.getParameter("courseId").toString();
+		String [] courseId = courseIdwithName.split("-");
 		for (Part part : request.getParts()) {
 			this.fileName = this.getFileName(part);
 			if (this.fileName == null || this.fileName.isEmpty()) continue;
@@ -48,9 +49,9 @@ public class InsertAssesmentDetailFromVIew extends HttpServlet {
 			if (!fileSaveDir.exists()) {
 				fileSaveDir.mkdirs();
 			}     
-			this.status=AssesmentDao.insertAssesmenDetails(assesmentName, timeLimit, courseId, fileName2);
+			this.status=AssesmentDao.insertAssesmenDetails(assesmentName, timeLimit, courseId[0], fileName2);
 			try {
-				this.status2 = Assesment.insertQuestion(fileName2,courseId,assesmentName);
+				this.status2 = Assesment.insertQuestion(fileName2,courseId[0],assesmentName);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

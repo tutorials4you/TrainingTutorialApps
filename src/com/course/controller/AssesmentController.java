@@ -17,6 +17,8 @@ import javax.servlet.http.HttpSession;
 import com.assesment.dom.AssesmentDao;
 import com.course.PictureCount;
 import com.course.dao.CourseDao;
+import com.course.dao.ResultRecordDao;
+import com.course.dao.ResultRecordDo;
 import com.course.dao.UsersDao;
 import com.course.model.CourseSecond;
 import com.course.model.Users;
@@ -24,13 +26,13 @@ import com.course.model.Users;
 public class AssesmentController extends HttpServlet {
     private static final long serialVersionUID = 1L;
     //private static String INSERT_OR_EDIT = "/user.jsp";
-    private static String INSERT_OR_EDIT = "/editAssesment.jsp";
+    private static String STATUS_OF_ASSESEMNTS = "/StatusOfAssesment.jsp";
     private static String PASS_COURSE = "/indexToPass.jsp";
     private static String Play_Video = "/video.jsp";
     private static String LIST_OF_ASSESMENTS = "/assesmentsDetails.jsp";
     private static String LAUNCH_COURSE = "/launchCourse.jsp";
     private static String LAUNCH_COURSE_NORMAL_USER = "/launchCourseNormalUser.jsp";
-    
+    private static String HOME_PAGE ="/WEB-INF/jsps/home.jsp";
     private AssesmentDao dao;
 
     public AssesmentController() {
@@ -56,94 +58,54 @@ public class AssesmentController extends HttpServlet {
 				System.err.println("Get All Assesments");
 			} 
         } else if (action.equalsIgnoreCase("edit")&&userRole.equals("admin")){
-            forward = INSERT_OR_EDIT;
-            int cid = Integer.parseInt(request.getParameter("cid"));
-          //  CourseSecond course = dao.getCourseById(cid);
-          //  request.setAttribute("course", course);
+            forward = STATUS_OF_ASSESEMNTS;
         } else if (action.equalsIgnoreCase("listOfAssesments")&&(userRole.equals("admin"))){
             forward = LIST_OF_ASSESMENTS;
             try {
 				request.setAttribute("assesments", dao.getAllAssesments());
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
         }else if (action.equalsIgnoreCase("launchCourse")&&(userRole.equals("admin"))){
             forward = LAUNCH_COURSE;
-          //  request.setAttribute("courses", dao.getAllCourses());
         }else if (action.equalsIgnoreCase("launchCourse")&&(userRole.equals("Test Manager")||userRole.equals("Test Analyst")||userRole.equals("Team Lead"))){
             forward = LAUNCH_COURSE_NORMAL_USER;
-          //  request.setAttribute("courses", dao.getAllCorsesforNormalUser(userRole));
         }else if (action.equalsIgnoreCase("launch")){
             String cid = request.getParameter("cid");
             String email = (String) session.getAttribute("email");
             try {
 				int status = PictureCount.updatePictureCount(cid,email);
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-            System.out.println("**********"+action);
-            out.println("<script type=\"text/javascript\">");
-            out.println("alert('User or password incorrect');");
-            out.println("location='index.jsp';");
-            out.println("</script>");
-            forward = PASS_COURSE+"?ver="+cid;
             session.setAttribute("cid",cid);  
+            forward = PASS_COURSE+"?ver="+cid;
         }else if (action.equalsIgnoreCase("launchVideo")){
             String fileName = request.getParameter("fileName");
             System.out.println("**********"+action);
             forward = Play_Video;
             session.setAttribute("videoFile",fileName);  
-        }else if (action.equalsIgnoreCase("launchNomal")&&userRole.equals("Manager")||userRole.equals("Test Analyst")||userRole.equals("Team Lead")){
-            String cid = request.getParameter("cid");
-            System.out.println("**********"+action);
-            forward = PASS_COURSE+"?ver="+cid;
-            session.setAttribute("cid",cid);  
-        } else {
-            forward = INSERT_OR_EDIT;
+        }else if (action.equalsIgnoreCase("statusOfResult")){
+        //		HttpSession session = request.getSession(true);
+        		String userSubRole = session.getAttribute("userSubRole").toString();
+        		String userId = session.getAttribute("email").toString();
+        		request.setAttribute("manCourse", ResultRecordDao.manCourse(userRole, userSubRole));
+        		request.setAttribute("aviCourse", ResultRecordDao.aviCourse(userRole, userSubRole));
+        		//request.setAttribute("mandCourse", "");
+  				request.setAttribute("statusOfResult", ResultRecordDao.statusOfParticularRole(userId));
+  				forward = STATUS_OF_ASSESEMNTS;
+        } else if (action.equalsIgnoreCase("home")){
+        	System.out.println("HOME >>>>>>>>");
+              forward = HOME_PAGE;
+          }     else {
+          //  String userId = session.getAttribute("email").toString();
+			//request.setAttribute("statusOfResult", ResultRecordDao.statusOfParticularRole(userId));
+            forward = STATUS_OF_ASSESEMNTS;
         }
 
         RequestDispatcher view = request.getRequestDispatcher(forward);
         view.forward(request, response);
     }
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        CourseSecond course = new CourseSecond();
-        course.setCid(request.getParameter("cid"));
-        course.setCname(request.getParameter("cname"));
-        course.setCauthor(request.getParameter("cauthor"));
-        course.setCmin(request.getParameter("minDuration"));
-        course.setTlEntrylevel(request.getParameter("atlel"));
-        course.setTlpo(request.getParameter("atlpo"));
-        course.setTlad(request.getParameter("atl_ad"));
-        course.setTlas(request.getParameter("atlas"));
-        course.setTmel(request.getParameter("atmel"));
-        course.setTmpo(request.getParameter("atmpo"));
-        course.setTmad(request.getParameter("atm_ad"));
-        course.setTmas(request.getParameter("atmas"));
-        course.setMtlEntrylevel(request.getParameter("mEntrylevel"));
-        course.setMtlpo(request.getParameter("mtlpo"));
-        course.setMtlad(request.getParameter("mtl_ad"));
-        course.setMtlas(request.getParameter("mtlas"));
-        course.setMtmel(request.getParameter("mtmel"));
-        course.setMtmpo(request.getParameter("mtmpo"));
-        course.setMtmad(request.getParameter("mtm_ad"));
-        course.setMtmas(request.getParameter("mtmas"));
-        course.setDm(request.getParameter("dm"));
-        String courseId =request.getParameter("cid").toString();
-        if(courseId.length()!=0)
-        {
-        	System.out.println("IF BLOCK OF POST");
-            course.setCid(courseId);
-            //dao.checkCourse(course);
-        }
-        
-    	RequestDispatcher view = request.getRequestDispatcher(LIST_OF_ASSESMENTS);
-        try {
-			request.setAttribute("assesments", dao.getAllAssesments());
-		} catch (SQLException e) {
-			System.err.println("From Las Line of Assesments Controller Class");		}
-        view.forward(request, response);
-    }
+    
 }

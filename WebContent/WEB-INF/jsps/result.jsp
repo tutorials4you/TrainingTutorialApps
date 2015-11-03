@@ -47,7 +47,7 @@ body {
 			<h3 align="center">Failed</h3>
 		</c:if>
 		<h2 align="center">
-			<a href='WEB-INF/jsps/home.jsp'>Take Another Exam</a>
+			<a href='NormalUsers'>Take Another Exam</a>
 		</h2>
 	</div>
 </body>

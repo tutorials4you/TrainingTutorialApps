@@ -106,7 +106,5 @@ public class AssesmentDO {
 	public String toString() {
 		return "CustomerTO [cid=" + cid + ", cname=" + cname + ", email=" + email + ", phone=" + phone + ", city="
 				+ city + ", status=" + status + "]";
-	}
-	
-	
+	}	
 }

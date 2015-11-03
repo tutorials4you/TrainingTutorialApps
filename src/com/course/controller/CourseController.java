@@ -74,6 +74,9 @@ public class CourseController extends HttpServlet {
             request.setAttribute("courses", dao.getAllCorsesforNormalUser(userRole,userSubRole));
         }else if (action.equalsIgnoreCase("launch")){
             String cid = request.getParameter("cid");
+            String cname = request.getParameter("cname");
+            session.setAttribute("cname", cname);
+            session.setAttribute("cid",cid);
             String email = (String) session.getAttribute("email");
             try {
 				int status = PictureCount.updatePictureCount(cid,email);
@@ -86,22 +89,24 @@ public class CourseController extends HttpServlet {
             out.println("alert('User or password incorrect');");
             out.println("location='index.jsp';");
             out.println("</script>");
+        //      
             forward = PASS_COURSE+"?ver="+cid;
-            session.setAttribute("cid",cid);  
         }else if (action.equalsIgnoreCase("launchVideo")){
             String fileName = request.getParameter("fileName");
             String cid = request.getParameter("cid");
+            String cname = request.getParameter("cname");
 
             System.out.println("**********"+action+cid+fileName);
             forward = Play_Video;
-            session.setAttribute("cid",cid);  
+         session.setAttribute("cid",cid);  
             session.setAttribute("videoFile",fileName);  
+            session.setAttribute("cname",cname);  
 
         }else if (action.equalsIgnoreCase("launchNomal")&&userRole.equals("Manager")||userRole.equals("Test Analyst")||userRole.equals("Team Lead")){
             String cid = request.getParameter("cid");
             System.out.println("**********"+action);
-            forward = PASS_COURSE+"?ver="+cid;
             session.setAttribute("cid",cid);  
+            forward = PASS_COURSE+"?ver="+cid;
         } else {
             forward = INSERT_OR_EDIT;
         }

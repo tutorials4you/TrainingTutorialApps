@@ -10,8 +10,8 @@ body {
 }
 </style>
 <title>Video </title>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-<style type="text/css">
+<!-- <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+ --><style type="text/css">
 <!--
 .style4 {
  color: #003333;
@@ -36,13 +36,13 @@ body {
   <tr>
     <td width="710" bgcolor="#CCCC33" align="center" ><span class="style4">Video Player Version 1.0</span>      <strong>
      
-      <embed  src=" <%= "http://localhost:2222/video/"+session.getAttribute("videoFile")%>" type="application/x-mplayer2" pluginspage="http://www.microsoft.com/Windows/MediaPlayer/" name="mediaplayer1" ShowStatusBar="true" EnableContextMenu="false" width="700" height="500" autostart="true" loop="false" align="middle" volume="60" ></embed>
+      <embed  src=" <%= "http://9.182.95.143:2222/video/"+session.getAttribute("videoFile")%>" type="application/x-mplayer2" pluginspage="http://www.microsoft.com/Windows/MediaPlayer/" name="mediaplayer1" ShowStatusBar="true" EnableContextMenu="false" width="700" height="500" autostart="true" loop="false" align="middle" volume="60" ></embed>
     </strong></td>
-    <%System.out.println("Sesssion Id "+session.getAttribute("videoFile")); %>
-  </tr>
+<%--     <%System.out.println("Sesssion Id "+session.getAttribute("videoFile")); %>
+ --%>  </tr>
   <tr>
-    <td bgcolor="#CCCC33"></td>
-  </tr>
+<!--     <td bgcolor="#CCCC33"></td>
+ -->  </tr>
 </table>
      		<a id="startAssesment" href="takeExam?test=<%=session.getAttribute("cid").toString()%>">Assesment</a>
 

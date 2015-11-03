@@ -99,6 +99,9 @@ CREATE SEQUENCE COURSE_ID
     User_Sub_Role      VARCHAR2(20),
     PRIMARY KEY (userid)
   );
+  
+  ALTER TABLE TRAINING_TOOL_USERS ADD profile_pic blob;
+  
 CREATE SEQUENCE USERS_ID
   MINVALUE 1
   MAXVALUE 999999999999999999999999999
@@ -143,7 +146,8 @@ CREATE TABLE Assesments
     cid number(10),
     noOfAttempt number(10),
     resdate date );
-    
+    ALTER TABLE ResultRecord ADD userSubRole varchar2(20);
+
       CREATE SEQUENCE Res_Id
   MINVALUE 1
   MAXVALUE 999999999999999999999999999

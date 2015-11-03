@@ -22,7 +22,7 @@ import javax.servlet.http.Part;
 import org.apache.commons.io.FilenameUtils;
 
 @WebServlet(value={"/InsertCourseDetails"})
-@MultipartConfig(fileSizeThreshold=10485760, maxFileSize=52428800, maxRequestSize=104857600)
+@MultipartConfig(fileSizeThreshold=10485760, maxFileSize=1000000000, maxRequestSize=104857600)
 public class InsertCourseDetails
 extends HttpServlet {
     int status;

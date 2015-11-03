@@ -56,10 +56,10 @@ public class AssesmentDao {
 			try {
 				connection = ConProvider.getConnection();
 				statement = AssesmentDao.connection.createStatement();
-				rs = statement.executeQuery("select CID from COURSE_DETAILS_RECORD");
+				rs = statement.executeQuery("select CID,CNAME from COURSE_DETAILS_RECORD");
 				while (rs.next()) {
 					//AssesmentDO assesment = new AssesmentDO();
-					coursesFromCourseDetail.add(rs.getString("CID"));
+					coursesFromCourseDetail.add(rs.getString("CID")+"-"+rs.getString("CNAME"));
 				}
 			}
 			catch (SQLException e) {

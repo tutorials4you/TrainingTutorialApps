@@ -39,7 +39,4 @@ public class AssesmentsDetailsDao {
 	public void setTotalQue(String totalQue) {
 		this.totalQue = totalQue;
 	}
-	
-	
-
-}
+	}

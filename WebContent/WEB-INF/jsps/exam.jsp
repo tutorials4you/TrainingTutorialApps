@@ -88,7 +88,8 @@ body {
 					onclick="customSubmit()" />
 			</c:if>
 			<input type="submit" name="action" value="Finish Exam"
-				onclick="customSubmit()" /> <input type="hidden" name="minute" />
+				onclick="customSubmit()" />
+				<input type="submit" name="action" value=" Exit "onclick="document.forms[0].action = 'NormalUsers'; return true;"/> <input type="hidden" name="minute" />
 			<input type="hidden" name="second" />
 		</form>
 	</div>

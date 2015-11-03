@@ -5,7 +5,7 @@
 	margin-left: 0%;
 	margin-top: -.5%;
 	width: 970px;
-	height: 420px;
+	height: 445px;
 	border: 1px solid #0066CC;
 	border-radius: 10px;
 	padding: 10px;
@@ -14,10 +14,25 @@
 	right: 11px;
 	border: 1px solid #0066CC;
 }
-
+#avifortester{
+	position: relative;
+	left:4px;
+}
+#mandRole{
+	position: relative;
+	left:4px;
+}
+#manTester{
+	position: relative;
+	left:4px;
+}
+#manTm{
+		position: relative;
+	left:4px;
+}
 #coursename {
 	position: relative;
-	bottom: 46px;
+	bottom: 83px;
 	left: 153px;
 }
 
@@ -34,7 +49,7 @@
 
 #courseauthor {
 	position: relative;
-	bottom: 46px;
+	bottom: 89px;
 	left: 153px;
 }
 
@@ -50,9 +65,9 @@
 }
 
 #minduration {
-	position: relative;
-	bottom: 46px;
-	left: 153px;
+	bottom: 91px;
+    left: 153px;
+    position: relative;
 }
 
 #minDUrationTextBox {
@@ -93,7 +108,7 @@ table tr td input,textarea,select {
 
 #userRole {
 	position: relative;
-	bottom: 33px;
+	bottom: 56px;
 }
 #button{
 	bottom: 40px;
