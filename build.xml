@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name ="TrainingToolApp" default="deploy" >
+<property name="libdir" value="WebContent\WEB-INF\lib"/>
+<property name="resources" value="WebContent"/>
+<property name="webdir" value="WebContent\WEB-INF"/>
+<property name="bindir" value="bin"/>
+<property name="appdir" value="${bindir}/TrainingToolApplication"/>
+<property name="webinfdir" value="${appdir}/WEB-INF"/>
+<property name="classes" value="${webinfdir}/classes"/>
+<target name="create" depends ="cleanup">
+<mkdir dir="${classes}"/>
+<mkdir dir="${webinfdir}/lib"/>
+</target>
+<target name="cleanup">
+	<delete dir="${bindir}"/>
+</target>
+	<target name="copy" depends="create">
+<copy todir="${webinfdir}/lib">
+		<fileset dir ="${libdir}" excludes="jsp-api.jar,servlet-api.jar"></fileset>
+	</copy>
+		<copy todir="${webinfdir}">
+				<fileset dir ="${webdir}" includes="web.xml"></fileset>
+			</copy>
+		<copy todir="${appdir}">
+						<fileset dir ="${resources}" includes="*.jsp"></fileset>
+		</copy>
+		<copy todir="${appdir}">
+								<fileset dir ="${resources}" includes="**" excludes="*.jsp,META-INF,WEB-INF"></fileset>
+		</copy>
+		<copy todir="${webinfdir}">
+						<fileset dir ="${webdir}" includes="**" excludes="web.xml"></fileset>
+		</copy>
+	</target>
+	<path id ="TrainingToolClassPath">
+		<fileset dir ="${libdir}" includes="*.jar"></fileset>
+	</path>
+<target name="compile" depends="copy">
+<javac srcdir="src" destdir="${webinfdir}/classes" classpathref="TrainingToolClassPath"></javac>
+</target>
+	<target name="createwar" depends="compile">
+	<jar basedir="${appdir}" destfile="dest/TrainingToolApp.war"></jar>
+	</target>
+	<property name ="tomcat" value="C:\Tomcat"></property>
+<target name="deploy" depends="createwar">
+<copy todir="${tomcat}/webapps">
+<fileset dir="dest" includes='*.war'></fileset>
+</copy>
+</target>
+<!--	<target name="start" depends ="deploy">
+	<parallel>
+	<java dir="${tomcat}/bin/" jar="${tomcat}/bin/bootstrap.jar" fork="true">
+		<arg value ="start"/>
+		</java>
+		<exec executable="C:\Program Files (x86)\Mozilla Firefox\firefox.exe">
+			<arg value ="http://locathost:2222/TrainingToolApp"/>
+			</exec>
+	</parallel>
+	</target> -->
+</project>
